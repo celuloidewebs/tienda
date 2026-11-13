@@ -208,10 +208,34 @@ section{padding:70px 0}
 .tab[aria-selected="true"] svg{color:#06101c}
 
 #tienda,.grupo{scroll-margin-top:calc(var(--cab,120px) + 8px)}
+
+/* Carrusel de portadas: se mueve con el ratón, con flechas o con el dedo */
+.carrusel{position:relative}
+.carrusel::before,.carrusel::after{content:"";position:absolute;top:0;bottom:14px;width:60px;z-index:3;pointer-events:none;transition:opacity .25s}
+.carrusel::before{left:0;background:linear-gradient(90deg,var(--noche-2),transparent);opacity:0}
+.carrusel::after{right:0;background:linear-gradient(-90deg,var(--noche-2),transparent)}
+.carrusel.ini-no::before{opacity:1}
+.carrusel.fin::after{opacity:0}
+.portadas.arrastrando{cursor:grabbing;scroll-snap-type:none}
+.portadas.arrastrando .portada{pointer-events:none}
+.portada img,.portada svg{-webkit-user-drag:none}
+.flecha{
+  position:absolute;top:calc(50% - 22px);transform:translateY(-50%);z-index:4;
+  width:46px;height:46px;border-radius:50%;cursor:pointer;
+  background:rgba(13,20,36,.92);color:var(--texto);border:1px solid var(--linea);
+  font-size:26px;line-height:1;display:grid;place-items:center;padding-bottom:3px;
+  box-shadow:0 8px 24px rgba(0,0,0,.4);transition:opacity .2s,border-color .2s,color .2s,transform .15s
+}
+.flecha:hover{border-color:var(--cian);color:var(--cian)}
+.flecha:active{transform:translateY(-50%) scale(.94)}
+.flecha.izq{left:-10px}.flecha.der{right:-10px}
+.flecha[disabled]{opacity:0;pointer-events:none}
+@media (hover:none),(max-width:860px){ .flecha{display:none} .portadas{cursor:auto} }
+
 /* Portadas de las sagas */
 .portadas{
   display:grid;grid-auto-flow:column;grid-auto-columns:158px;gap:14px;
-  overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 2px 18px;margin-top:18px;
+  overflow-x:auto;scroll-snap-type:x mandatory;padding:16px 4px 30px;margin-top:6px;cursor:grab;user-select:none;-webkit-user-select:none;
   scrollbar-width:none
 }
 .portadas::-webkit-scrollbar{display:none}
@@ -666,11 +690,11 @@ catalogo.innerHTML = GRUPOS.map(g => {
   <div class="grupo" id="g-${g.id}" data-grupo="${g.id}">
     <h2>${g.nombre.split(" ").length>1 ? g.nombre : `<em>${g.nombre}</em>`}</h2>
     <p>${DESC_GRUPO[g.id]||""}</p>
-    ${secs.length>1 ? `<div class="portadas">${secs.map(sec => `
+    ${secs.length>1 ? `<div class="carrusel"><button type="button" class="flecha izq" aria-label="Anteriores">‹</button><div class="portadas">${secs.map(sec => `
       <a class="portada" href="#${sec.id}" style="--c:${sec.color}">
         ${EMBLEMAS[sec.id] ? `<svg viewBox="0 0 100 100" fill="none" stroke="${sec.color}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="color:${sec.color}" aria-hidden="true">${EMBLEMAS[sec.id]}</svg>` : dibujo(tipoPrincipal(sec), sec.color)}
         <span class="pie-p"><b>${esc(sec.nombre)}</b><small>${sec.productos.length} productos</small></span>
-      </a>`).join("")}</div>` : ""}
+      </a>`).join("")}</div><button type="button" class="flecha der" aria-label="Siguientes">›</button></div>` : ""}
     ${secs.map(sec => `
       <div class="saga${sec.productos.length<=4?" pocos":""}" id="${sec.id}" style="--c:${sec.color};--tinta:${tinta(sec.color)}">
         <div class="saga-cab">
@@ -744,6 +768,49 @@ function pintar(){
   }
 }
 pintar();
+
+/* Carruseles: arrastrar con el ratón, flechas y rueda horizontal del trackpad */
+document.querySelectorAll(".carrusel").forEach(car => {
+  const fila = car.querySelector(".portadas");
+  const izq = car.querySelector(".izq"), der = car.querySelector(".der");
+  const estado = () => {
+    const max = fila.scrollWidth - fila.clientWidth - 10;
+    izq.disabled = fila.scrollLeft <= 10;
+    der.disabled = fila.scrollLeft >= max;
+    car.classList.toggle("ini-no", fila.scrollLeft > 10);
+    car.classList.toggle("fin", fila.scrollLeft >= max);
+  };
+  const paso = () => fila.clientWidth * 0.8;
+  izq.addEventListener("click", () => fila.scrollBy({left:-paso(), behavior:"smooth"}));
+  der.addEventListener("click", () => fila.scrollBy({left: paso(), behavior:"smooth"}));
+  fila.addEventListener("scroll", estado, {passive:true});
+  addEventListener("resize", estado);
+  estado();
+
+  let x0 = 0, s0 = 0, abajo = false, movido = false;
+  fila.addEventListener("pointerdown", e => {
+    if (e.pointerType !== "mouse" || e.button !== 0) return;
+    abajo = true; movido = false; x0 = e.clientX; s0 = fila.scrollLeft;
+  });
+  addEventListener("pointermove", e => {
+    if (!abajo) return;
+    const dx = e.clientX - x0;
+    if (!movido && Math.abs(dx) > 5) { movido = true; fila.classList.add("arrastrando"); }
+    if (movido) { fila.scrollLeft = s0 - dx; e.preventDefault(); }
+  });
+  addEventListener("pointerup", () => {
+    if (!abajo) return;
+    abajo = false;
+    if (movido) {
+      // suelta y deja que encaje en la portada más cercana
+      requestAnimationFrame(() => fila.classList.remove("arrastrando"));
+      setTimeout(() => { movido = false; }, 0);
+    }
+  });
+  // si se arrastró, el clic no abre la portada
+  fila.addEventListener("click", e => { if (fila.classList.contains("arrastrando")) { e.preventDefault(); e.stopPropagation(); } }, true);
+  fila.addEventListener("dragstart", e => e.preventDefault());
+});
 
 /* Alto de la cabecera, para que los saltos no queden tapados */
 const medirCab = () => document.documentElement.style.setProperty("--cab", document.querySelector("header.top").offsetHeight + "px");
