@@ -182,31 +182,25 @@ section{padding:70px 0}
 .vacio-msg{color:var(--suave);padding:40px 0;text-align:center;display:none}
 
 
-/* Navegación de la tienda: pestañas como en una app */
-.secnav{
-  position:sticky;top:64px;z-index:15;
-  background:rgba(13,20,36,.92);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);
-  border-bottom:1px solid var(--linea);
-}
-.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity}
+/* Categorías: botones arriba, dentro de la cabecera */
+.secnav{border-top:1px solid var(--linea);padding:10px 0}
+.tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity}
 .tabs::-webkit-scrollbar{display:none}
 .tab{
-  position:relative;flex:none;display:flex;flex-direction:column;align-items:center;gap:5px;
-  padding:12px 16px 11px;min-width:84px;background:none;border:0;cursor:pointer;
-  color:var(--suave);font-family:inherit;font-size:12.5px;font-weight:700;letter-spacing:.02em;
-  scroll-snap-align:start;transition:color .2s;-webkit-tap-highlight-color:transparent
+  flex:none;display:inline-flex;align-items:center;gap:8px;
+  padding:8px 15px 8px 12px;border-radius:999px;cursor:pointer;
+  background:var(--panel);border:1px solid var(--linea);
+  color:var(--texto);font-family:inherit;font-size:13.5px;font-weight:700;
+  scroll-snap-align:start;transition:background .2s,border-color .2s,color .2s,transform .15s;
+  -webkit-tap-highlight-color:transparent
 }
-.tab svg{width:24px;height:24px;transition:transform .25s}
-.tab::after{
-  content:"";position:absolute;left:18px;right:18px;bottom:0;height:3px;border-radius:3px 3px 0 0;
-  background:var(--cian);transform:scaleX(0);transition:transform .25s
-}
-.tab:hover{color:var(--texto)}
-.tab[aria-selected="true"]{color:var(--cian)}
-.tab[aria-selected="true"]::after{transform:scaleX(1)}
-.tab[aria-selected="true"] svg{transform:translateY(-1px) scale(1.08)}
+.tab svg{width:18px;height:18px;color:var(--tc,var(--cian));flex:none}
+.tab:hover{border-color:var(--tc,var(--cian));transform:translateY(-1px)}
+.tab:active{transform:scale(.97)}
+.tab[aria-selected="true"]{background:var(--tc,var(--cian));border-color:var(--tc,var(--cian));color:#06101c}
+.tab[aria-selected="true"] svg{color:#06101c}
 
-#tienda{scroll-margin-top:64px}
+#tienda,.grupo{scroll-margin-top:calc(var(--cab,120px) + 8px)}
 /* Portadas de las sagas */
 .portadas{
   display:grid;grid-auto-flow:column;grid-auto-columns:158px;gap:14px;
@@ -241,7 +235,7 @@ section{padding:70px 0}
 }
 .grupo > h2 em{font-style:normal;color:var(--cian);text-transform:uppercase}
 .grupo > p{color:var(--suave);margin-bottom:8px}
-.saga{margin-top:34px;scroll-margin-top:140px}
+.saga{margin-top:34px;scroll-margin-top:calc(var(--cab,120px) + 16px)}
 .saga-cab{
   display:flex;align-items:end;justify-content:space-between;gap:16px;
   border-left:5px solid var(--c);padding-left:14px;margin-bottom:16px
@@ -283,8 +277,8 @@ section{padding:70px 0}
 .saga-cab .cuantos{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--c);
   border:1px solid color-mix(in srgb, var(--c) 50%, transparent);padding:3px 9px;border-radius:999px;font-weight:700}
 .saga-cab p{display:none}
-.rejilla{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.saga:not(.abierta) .rejilla > .caja:nth-child(n+9){display:none}
+.rejilla{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.saga:not(.abierta) .rejilla > .caja:nth-child(n+6){display:none}
 .caja{
   display:flex;flex-direction:column;background:var(--panel);
   border:1px solid var(--linea);border-radius:18px;overflow:hidden;
@@ -330,14 +324,11 @@ section{padding:70px 0}
   padding:11px 24px;font-family:inherit;font-weight:700;font-size:14px;transition:.15s
 }
 .ver-todos:hover{background:color-mix(in srgb, var(--c) 18%, transparent);border-color:var(--c)}
-.saga.pocos8 .ver-todos{display:none}
+.saga.pocos .ver-todos{display:none}
 #resultados .rejilla > .caja{display:flex !important}
-@media (max-width:1000px){ .rejilla{grid-template-columns:repeat(3,1fr)} }
+@media (max-width:1100px){ .rejilla{grid-template-columns:repeat(3,1fr)} }
 @media (max-width:860px){
   .rejilla{grid-template-columns:repeat(2,1fr);gap:12px}
-  .saga:not(.abierta) .rejilla > .caja:nth-child(n+5){display:none}
-  .saga.pocos8 .ver-todos{display:block}
-  .saga.pocos4 .ver-todos{display:none}
   .caja{border-radius:14px}
   .caja .info{padding:12px 12px 14px;gap:8px}
   .caja h3{font-size:16px}
@@ -398,14 +389,15 @@ footer .marca{font-size:18px}
 @media (max-width:860px){
   .portadas{grid-auto-columns:128px}
   .portada b{font-size:16px}
-  .tab{min-width:74px;padding:10px 12px 9px}
+  .tab{font-size:12.5px;padding:7px 12px 7px 10px}
+  .top .wrap{height:56px}
   .flechas{display:none}
   .fila{grid-auto-columns:72%}
   .hero{padding:50px 0 50px}
   .hero .wrap{grid-template-columns:1fr}
   .claqueta{max-width:240px;order:-1}
   .reels{grid-template-columns:repeat(2,1fr)}
-  .top nav{display:none}
+  .top nav{gap:14px;font-size:13px}
 }
 @media (max-width:420px){
   .wrap{padding:0 16px}
@@ -419,13 +411,13 @@ footer .marca{font-size:18px}
   <div class="wrap">
     <a class="marca" href="#">CELULOIDE<br>CINEMA<small>LA TIENDA</small></a>
     <nav>
-      <a href="#g-sagas">Sagas</a>
-      <a href="#g-clasicos">Clásicos</a>
-      <a href="#g-series">Series</a>
-      <a href="#g-rodar">Grabar</a>
       <a href="https://www.instagram.com/celuloidecinema" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.youtube.com/@celuloidecinema" target="_blank" rel="noopener">YouTube</a>
     </nav>
   </div>
+  <nav class="secnav" aria-label="Categorías de la tienda">
+    <div class="wrap tabs" id="grupos" role="tablist"></div>
+  </nav>
 </header>
 
 <div class="tira" aria-hidden="true"></div>
@@ -474,9 +466,6 @@ footer .marca{font-size:18px}
 </section>
 
 <section id="tienda" style="background:var(--noche-2);padding-top:0">
-  <nav class="secnav" aria-label="Secciones de la tienda">
-    <div class="wrap tabs" id="grupos" role="tablist"></div>
-  </nav>
   <div class="wrap">
     <div class="titulo-sec" style="margin-top:40px;margin-bottom:10px">
       <div>
@@ -676,13 +665,13 @@ catalogo.innerHTML = GRUPOS.map(g => {
         <span class="pie-p"><b>${esc(sec.nombre)}</b><small>${sec.productos.length} productos</small></span>
       </a>`).join("")}</div>` : ""}
     ${secs.map(sec => `
-      <div class="saga${sec.productos.length<=8?" pocos8":""}${sec.productos.length<=4?" pocos4":""}" id="${sec.id}" style="--c:${sec.color};--tinta:${tinta(sec.color)}">
+      <div class="saga${sec.productos.length<=5?" pocos":""}" id="${sec.id}" style="--c:${sec.color};--tinta:${tinta(sec.color)}">
         <div class="saga-cab">
           <h3 class="titulo-saga">${esc(sec.nombre)}</h3>
           <span class="cuantos">${sec.productos.length} productos</span>
         </div>
         <div class="rejilla">${sec.productos.map(([tipo,nombre,txt,busca,asin]) => tarjeta({tipo,nombre,txt,busca,asin,sec})).join("")}</div>
-        <button type="button" class="ver-todos" data-abrir>Ver los ${sec.productos.length} de ${esc(sec.nombre)} →</button>
+        <button type="button" class="ver-todos" data-abrir>Ver más</button>
       </div>`).join("")}
   </div>`}).join("");
 
@@ -691,7 +680,7 @@ catalogo.addEventListener("click", e => {
   const saga = b.closest(".saga");
   const abierta = saga.classList.toggle("abierta");
   const n = saga.querySelectorAll(".caja").length, nombre = saga.querySelector(".titulo-saga").textContent;
-  b.textContent = abierta ? "Ver menos ↑" : `Ver los ${n} de ${nombre} →`;
+  b.textContent = abierta ? "Ver menos" : "Ver más";
   if (!abierta) saga.scrollIntoView({behavior:"smooth", block:"start"});
 });
 
@@ -705,10 +694,11 @@ const ICONO_TAB = {
   casa:`<rect x="2" y="8" width="20" height="10" rx="3"/><circle cx="8" cy="13" r="3"/><path d="M15 11h4M15 14h3M5 18v2M19 18v2"/>`,
   libros:`<path d="M12 6c-2.5-2-6-2-9-1v15c3-1 6.5-1 9 1 2.5-2 6-2 9-1V5c-3-1-6.5-1-9 1zM12 6v15"/>`,
 };
+const COLOR_GRUPO = {todo:"#29d9f1",sagas:"#ffe81f",clasicos:"#f2c14e",series:"#ff4d5e",rodar:"#3ee07a",casa:"#b07cff",libros:"#ff8fd1"};
 let grupo = "todo", q = "";
 const grupos = document.getElementById("grupos");
 grupos.innerHTML = [{id:"todo",nombre:"Todo"}, ...GRUPOS].map(g => `
-  <button class="tab" role="tab" data-g="${g.id}" aria-selected="${g.id==="todo"}">
+  <button class="tab" role="tab" data-g="${g.id}" aria-selected="${g.id==="todo"}" style="--tc:${COLOR_GRUPO[g.id]}">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONO_TAB[g.id]}</svg>
     ${g.id==="rodar" ? "Grabar" : g.nombre.replace(" de cine","")}
   </button>`).join("");
@@ -719,7 +709,7 @@ grupos.addEventListener("click", e => {
   b.scrollIntoView({behavior:"smooth", inline:"center", block:"nearest"});
   if (q) { q=""; document.getElementById("buscar").value=""; }
   pintar();
-  const top = document.getElementById("tienda").getBoundingClientRect().top + scrollY - 64;
+  const top = document.getElementById("tienda").getBoundingClientRect().top + scrollY - document.querySelector("header.top").offsetHeight;
   scrollTo({top, behavior:"smooth"});
 });
 
@@ -747,6 +737,10 @@ function pintar(){
   }
 }
 pintar();
+
+/* Alto de la cabecera, para que los saltos no queden tapados */
+const medirCab = () => document.documentElement.style.setProperty("--cab", document.querySelector("header.top").offsetHeight + "px");
+medirCab(); addEventListener("resize", medirCab);
 
 /* ---------- Del reel a tu casa ---------- */
 document.getElementById("reels-grid").innerHTML = REELS.map(r => {
