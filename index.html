@@ -347,6 +347,38 @@ section{padding:70px 0}
   .ver-todos{width:100%}
 }
 
+
+/* Del reel a tu casa: misma caja que los productos */
+.reel2{display:flex;flex-direction:column;text-decoration:none;color:inherit;background:var(--panel);
+  border:1px solid var(--linea);border-radius:18px;overflow:hidden;
+  transition:transform .25s cubic-bezier(.2,.8,.2,1), border-color .25s, box-shadow .25s}
+.reel2:hover{transform:translateY(-4px);border-color:color-mix(in srgb, var(--c) 70%, transparent);
+  box-shadow:0 16px 40px -12px color-mix(in srgb, var(--c) 45%, transparent)}
+.reel2 .foto{position:relative;aspect-ratio:4/3;display:grid;place-items:center;overflow:hidden;
+  background:
+    radial-gradient(70% 60% at 20% 15%, color-mix(in srgb, var(--c) 75%, transparent), transparent 70%),
+    radial-gradient(70% 60% at 85% 90%, color-mix(in srgb, var(--t) 70%, transparent), transparent 70%),
+    linear-gradient(160deg, #18233d, #0b1120)}
+.reel2 .foto svg{width:46%;height:auto;filter:drop-shadow(0 10px 18px rgba(0,0,0,.45));transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.reel2:hover .foto svg{transform:scale(1.06) rotate(-2deg)}
+.reel2 .en-reel{position:absolute;top:12px;left:12px;background:rgba(7,11,20,.8);color:var(--cian);
+  border:1px solid var(--cian);border-radius:999px;padding:4px 10px 3px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.reel2 .info{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.reel2 h3{font-family:"Abril Fatface",serif;font-weight:400;font-size:22px;line-height:1.1}
+.reel2 p{color:var(--suave);font-size:14px;flex:1}
+.reel2 .amazon{display:block;text-align:center;background:var(--cian);color:#04121a;border-radius:999px;padding:10px 12px;font-weight:700;font-size:14px;margin-top:4px}
+@media (max-width:860px){
+  .reels{gap:12px}
+  .reel2{border-radius:14px}
+  .reel2 .info{padding:12px;gap:6px}
+  .reel2 h3{font-size:17px}
+  .reel2 p{font-size:12.5px}
+  .reel2 .amazon{font-size:12.5px;padding:9px 6px;white-space:nowrap}
+  .reel2 .en-reel{font-size:9.5px;top:8px;left:8px;padding:3px 8px 2px}
+  .reel2 .foto{aspect-ratio:1/1;padding-top:22px}
+  .reel2 .foto svg{width:52%}
+}
+
 /* Banda */
 .banda{
   background:linear-gradient(90deg,var(--cian),#7ae9f8);color:#04121a;
@@ -583,17 +615,7 @@ document.getElementById("anio").textContent = new Date().getFullYear();
 document.getElementById("cuenta").textContent = `${TODOS.length} productos en ${SECCIONES.length} secciones`;
 
 const secPorId = Object.fromEntries(SECCIONES.map(s => [s.id, s]));
-document.getElementById("reels-grid").innerHTML = REELS.map(r => {
-  const c = (secPorId[r.saga]||{}).color || "#29d9f1";
-  return `
-  <a class="reel" href="${enlace(r.busca)}" ${attrs}>
-    <div class="fondo">${dibujo(r.tipo, c)}</div>
-    <div class="txt">
-      <div class="pre">En el reel</div>
-      <h3>${r.titulo}</h3>
-      <div class="ver">${r.reel}<br><b>Verlo en Amazon →</b></div>
-    </div>
-  </a>`}).join("");
+
 
 const DESC_GRUPO = {
   sagas:"Las que vuelves a ver cada año.",
@@ -725,6 +747,23 @@ function pintar(){
   }
 }
 pintar();
+
+/* ---------- Del reel a tu casa ---------- */
+document.getElementById("reels-grid").innerHTML = REELS.map(r => {
+  const sec = secPorId[r.saga] || {color:"#29d9f1", id:""};
+  const dib = EMBLEMAS[sec.id] && r.tipo!=="croma" ? EMBLEMAS[sec.id] : (ICONOS[r.tipo]||ICONOS.disco);
+  return `
+  <a class="reel2" href="${enlace(r.busca)}" ${attrs} style="--c:${sec.color};--t:${COLOR_TIPO[r.tipo]||"#29d9f1"}">
+    <div class="foto">
+      <span class="en-reel">▶ En el reel</span>
+      <svg viewBox="-4 -4 108 108" fill="rgba(255,255,255,.14)" stroke="#fff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${dib}</svg>
+    </div>
+    <div class="info">
+      <h3>${esc(r.titulo)}</h3>
+      <p>${esc(r.reel)}</p>
+      <span class="amazon">Ver en Amazon</span>
+    </div>
+  </a>`}).join("");
 </script>
 </body>
 </html>
