@@ -182,22 +182,56 @@ section{padding:70px 0}
 .vacio-msg{color:var(--suave);padding:40px 0;text-align:center;display:none}
 
 
-/* Navegación de la tienda */
+/* Navegación de la tienda: pestañas como en una app */
 .secnav{
   position:sticky;top:64px;z-index:15;
-  background:rgba(13,20,36,.94);backdrop-filter:blur(10px);
-  border-bottom:1px solid var(--linea);padding:12px 0;
+  background:rgba(13,20,36,.92);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);
+  border-bottom:1px solid var(--linea);
 }
-.secnav .wrap{display:flex;gap:10px;align-items:center;overflow-x:auto;scrollbar-width:none}
-.secnav .wrap::-webkit-scrollbar{display:none}
-.secnav .chip{white-space:nowrap;flex:none}
-.indice{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px}
-.indice a{
-  text-decoration:none;font-size:13px;padding:6px 12px;border-radius:999px;
-  border:1px solid var(--linea);color:var(--suave);transition:.15s;display:inline-flex;align-items:center;gap:7px
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;scroll-snap-type:x proximity}
+.tabs::-webkit-scrollbar{display:none}
+.tab{
+  position:relative;flex:none;display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding:12px 16px 11px;min-width:84px;background:none;border:0;cursor:pointer;
+  color:var(--suave);font-family:inherit;font-size:12.5px;font-weight:700;letter-spacing:.02em;
+  scroll-snap-align:start;transition:color .2s;-webkit-tap-highlight-color:transparent
 }
-.indice a i{width:8px;height:8px;border-radius:50%;background:var(--c);display:inline-block}
-.indice a:hover{color:var(--texto);border-color:var(--c)}
+.tab svg{width:24px;height:24px;transition:transform .25s}
+.tab::after{
+  content:"";position:absolute;left:18px;right:18px;bottom:0;height:3px;border-radius:3px 3px 0 0;
+  background:var(--cian);transform:scaleX(0);transition:transform .25s
+}
+.tab:hover{color:var(--texto)}
+.tab[aria-selected="true"]{color:var(--cian)}
+.tab[aria-selected="true"]::after{transform:scaleX(1)}
+.tab[aria-selected="true"] svg{transform:translateY(-1px) scale(1.08)}
+
+#tienda{scroll-margin-top:64px}
+/* Portadas de las sagas */
+.portadas{
+  display:grid;grid-auto-flow:column;grid-auto-columns:158px;gap:14px;
+  overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 2px 18px;margin-top:18px;
+  scrollbar-width:none
+}
+.portadas::-webkit-scrollbar{display:none}
+.portada{
+  position:relative;aspect-ratio:2/3;border-radius:14px;overflow:hidden;text-decoration:none;
+  scroll-snap-align:start;isolation:isolate;
+  background:
+    radial-gradient(120% 70% at 50% 0%, color-mix(in srgb, var(--c) 55%, transparent), transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--c) 18%, #0d1424), #070b14 85%);
+  box-shadow:0 0 0 1px color-mix(in srgb, var(--c) 30%, transparent) inset, 0 10px 30px rgba(0,0,0,.35);
+  transition:transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s;
+}
+.portada:hover,.portada:focus-visible{transform:translateY(-6px) scale(1.02);box-shadow:0 0 0 2px var(--c) inset,0 18px 40px color-mix(in srgb, var(--c) 25%, transparent)}
+.portada svg{position:absolute;left:50%;top:38%;width:62%;transform:translate(-50%,-50%);opacity:.9;filter:drop-shadow(0 0 18px color-mix(in srgb, var(--c) 60%, transparent))}
+.portada::before{ /* grano */
+  content:"";position:absolute;inset:0;z-index:1;opacity:.12;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.portada .pie-p{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:40px 12px 12px;background:linear-gradient(to top,rgba(7,11,20,.96) 40%,transparent)}
+.portada b{display:block;font-family:"Abril Fatface",serif;font-weight:400;font-size:19px;line-height:1.05;color:#fff}
+.portada small{display:block;margin-top:5px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--c)}
 
 /* Grupos y sagas */
 .grupo{padding-top:34px}
@@ -214,7 +248,7 @@ section{padding:70px 0}
 }
 .saga-cab h3{font-family:"Abril Fatface",serif;font-weight:400;font-size:clamp(24px,3vw,34px);line-height:1.05}
 .saga-cab p{color:var(--suave);font-size:14px;margin-top:4px}
-.saga-cab .n{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--c);white-space:nowrap}
+.saga-cab .n{display:inline-block;margin-left:10px;vertical-align:middle;font-family:'Courier Prime',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--c);border:1px solid color-mix(in srgb, var(--c) 45%, transparent);padding:3px 8px;border-radius:999px}
 .flechas{display:flex;gap:6px;flex:none}
 .flechas button{
   width:38px;height:38px;border-radius:50%;border:1px solid var(--linea);background:var(--noche);
@@ -254,6 +288,9 @@ footer .marca{font-size:18px}
 
 /* Móvil */
 @media (max-width:860px){
+  .portadas{grid-auto-columns:128px}
+  .portada b{font-size:16px}
+  .tab{min-width:74px;padding:10px 12px 9px}
   .flechas{display:none}
   .fila{grid-auto-columns:72%}
   .hero{padding:50px 0 50px}
@@ -330,7 +367,7 @@ footer .marca{font-size:18px}
 
 <section id="tienda" style="background:var(--noche-2);padding-top:0">
   <nav class="secnav" aria-label="Secciones de la tienda">
-    <div class="wrap" id="grupos" role="group"></div>
+    <div class="wrap tabs" id="grupos" role="tablist"></div>
   </nav>
   <div class="wrap">
     <div class="titulo-sec" style="margin-top:40px;margin-bottom:10px">
@@ -340,7 +377,6 @@ footer .marca{font-size:18px}
       </div>
       <input class="buscar" id="buscar" type="search" placeholder="Buscar: Batman, LEGO, vinilo…" aria-label="Buscar productos">
     </div>
-    <div class="indice" id="indice"></div>
     <div id="catalogo"></div>
     <div id="resultados"><div class="grid" id="grid"></div></div>
     <p class="vacio-msg" id="vacio">No hay nada con eso. Prueba otra palabra.</p>
@@ -447,6 +483,44 @@ const DESC_GRUPO = {
   casa:"La sala de cine, sin salir del salón.",
   libros:"Para saber más que el de al lado.",
 };
+// Emblema de cada saga en su portada
+const EMBLEMAS = {
+  "star-wars":`<path d="M50 4v62" stroke-width="8"/><rect x="43" y="66" width="14" height="26" rx="2"/><path d="M43 74h14M43 82h14"/>`,
+  "harry-potter":`<path d="M58 6L34 50h18L40 94l30-52H52z" fill="currentColor" opacity=".35"/><path d="M58 6L34 50h18L40 94l30-52H52z"/>`,
+  "senor-anillos":`<ellipse cx="50" cy="54" rx="32" ry="30"/><ellipse cx="50" cy="54" rx="22" ry="20"/><path d="M30 40c8 6 32 6 40 0" opacity=".5"/>`,
+  "marvel":`<circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="29"/><circle cx="50" cy="50" r="18"/><path d="M50 38l3.5 8h8.5l-7 5 2.7 8.5L50 54.5 42.3 59.5 45 51l-7-5h8.5z" fill="currentColor"/>`,
+  "dc":`<path d="M6 44c12 0 16 8 16 8s4-14 16-14l5-12 4 9h6l4-9 5 12c12 0 16 14 16 14s4-8 16-8c-8 10-8 24-8 24s-12-8-19 4c-4-7-12-7-14 2-2-9-10-9-14-2-7-12-19-4-19-4s0-14-8-24z"/>`,
+  "matrix":`<rect x="16" y="36" width="68" height="28" rx="14" transform="rotate(-35 50 50)"/><path d="M50 26v48" transform="rotate(-35 50 50)"/><path d="M50 26a14 14 0 0 1 0 28" transform="rotate(-35 50 50)" fill="currentColor" opacity=".45" stroke="none"/>`,
+  "jurassic":`<path d="M14 48l18-20h30l12 10h12v14H70l-6 8 8 26H60l-6-18H40l-4 18H26l2-24-14-6z"/><circle cx="66" cy="38" r="2.5" fill="currentColor"/>`,
+  "indiana":`<path d="M8 64c10 8 74 8 84 0-6-4-14-6-20-6l-2-22c-2-10-38-10-40 0l-2 22c-6 0-14 2-20 6z"/><path d="M30 52c12 4 28 4 40 0"/>`,
+  "regreso-futuro":`<path d="M50 50V14M50 50L18 82M50 50l32 32"/><circle cx="50" cy="14" r="7"/><circle cx="18" cy="82" r="7"/><circle cx="82" cy="82" r="7"/><circle cx="50" cy="50" r="5" fill="currentColor"/>`,
+  "alien":`<path d="M50 8c-20 0-30 26-30 46 0 22 14 38 30 38s30-16 30-38C80 34 70 8 50 8z"/><path d="M38 30c4 8 20 8 24 0M30 52c10-4 30-4 40 0" opacity=".6"/>`,
+  "terminator":`<path d="M14 40c0-18 16-30 36-30s36 12 36 30v16l-10 10v18H24V66L14 56z"/><circle cx="35" cy="44" r="7" fill="currentColor" opacity=".9"/><circle cx="65" cy="44" r="7"/><path d="M34 72h32M40 72v12M50 72v12M60 72v12"/>`,
+  "pixar":`<path d="M24 88h36M42 88V70l-14-22 22-24"/><path d="M50 24l26 8-8 22-26-8z"/><circle cx="42" cy="70" r="3" fill="currentColor"/>`,
+  "ghibli":`<path d="M30 30l-6-20 16 14M70 30l6-20-16 14"/><path d="M20 60c0-22 13-34 30-34s30 12 30 34c0 18-13 30-30 30S20 78 20 60z"/><circle cx="38" cy="48" r="5"/><circle cx="62" cy="48" r="5"/><path d="M34 70c5 4 27 4 32 0M44 64l6-4 6 4" opacity=".7"/>`,
+  "cazafantasmas":`<circle cx="50" cy="50" r="40"/><path d="M36 74V46a14 14 0 0 1 28 0v28l-5-5-4 5-5-5-5 5-4-5z"/><circle cx="45" cy="46" r="2.5" fill="currentColor"/><circle cx="55" cy="46" r="2.5" fill="currentColor"/><path d="M22 22l56 56" stroke-width="6"/>`,
+  "bond":`<path d="M6 46h52l6-8h22v10h-8v6H64l-4 18H46l2-18H6z"/><path d="M58 54l-4 8"/>`,
+  "dune":`<circle cx="66" cy="32" r="14"/><path d="M6 72c16-14 28-14 44 0s28 14 44 0M6 88c16-10 28-10 44 0s28 10 44 0"/>`,
+  "padrino":`<path d="M30 92V60l-6-14 8-4 6 10V30l6-2 2 22V20l6-2 2 30V26l6 2v26l4-14 6 2-4 26c-2 10-8 16-12 18v6"/><path d="M32 4v34M44 4v24M56 4v14M66 4v20" opacity=".5" stroke-width="1.5"/>`,
+  "hitchcock":`<path d="M36 90c-4-14 2-22 6-26l-12-6c-4-2-4-8 2-10l4-2c-4-8-4-18 4-26 10-10 34-10 40 6 4 10 0 22-6 30v34"/>`,
+  "kubrick":`<circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="26"/><circle cx="50" cy="50" r="12" fill="currentColor" opacity=".85"/><circle cx="46" cy="46" r="3" fill="#fff" stroke="none"/>`,
+  "tarantino":`<rect x="12" y="34" width="76" height="50" rx="5"/><path d="M38 34v-8h24v8M12 52h76"/><path d="M50 52l-14 28M50 52l14 28M50 52v30" opacity=".5"/>`,
+  "spielberg":`<path d="M10 74c14 0 18-6 26-12 6-26 20-42 34-46-6 16-6 34 2 52 6 4 12 6 18 6"/><path d="M6 86c10-6 20-6 30 0s20 6 30 0 20-6 30 0" opacity=".7"/>`,
+  "terror":`<path d="M70 10L26 74l-6 18 16-10 44-64z"/><path d="M60 24l10 6M26 74l10 8"/><path d="M76 66c0 6-4 10-4 14a4 4 0 0 0 8 0c0-4-4-8-4-14z" fill="currentColor" opacity=".8"/>`,
+  "cine-clasico":`<circle cx="50" cy="16" r="9"/><path d="M42 30h16l-2 10 4 4-4 18 2 18H42l2-18-4-18 4-4z"/><path d="M34 86h32v8H34z"/>`,
+  "simpson":`<circle cx="50" cy="50" r="38"/><circle cx="50" cy="50" r="14"/><g stroke-width="5" opacity=".9"><path d="M30 30l4 4M66 28l-3 5M72 56l-5-1M36 70l3-4M56 74l-1-5M24 52l5 0"/></g>`,
+  "stranger":`<path d="M8 30c14 8 28 8 42 0s28-8 42 0"/><g fill="currentColor"><circle cx="16" cy="36" r="4"/><circle cx="32" cy="40" r="4" opacity=".6"/><circle cx="50" cy="38" r="4"/><circle cx="68" cy="40" r="4" opacity=".6"/><circle cx="84" cy="36" r="4"/></g><path d="M26 82l10-24h18l8 24M18 82a10 10 0 1 0 0-1M82 82a10 10 0 1 0 0-1M54 58l6-8h8"/>`,
+  "tronos":`<path d="M14 76L8 28l22 18 20-28 20 28 22-18-6 48z"/><path d="M14 86h72"/><circle cx="50" cy="56" r="5" fill="currentColor"/>`,
+  "breaking":`<path d="M40 10h20M44 10v26L22 80c-2 6 2 10 8 10h40c6 0 10-4 8-10L56 36V10"/><path d="M30 66h40" opacity=".6"/><rect x="38" y="58" width="12" height="12" fill="currentColor" opacity=".5" stroke="none"/>`,
+  "friends":`<path d="M24 34h48v30a18 18 0 0 1-18 18H42a18 18 0 0 1-18-18z"/><path d="M72 42h6a10 10 0 0 1 0 20h-6"/><path d="M38 12c0 6 6 6 6 14M54 12c0 6 6 6 6 14" opacity=".6"/>`,
+};
+// El dibujo de la portada: lo más típico de la saga (réplica si hay, si no lo que más se repita)
+function tipoPrincipal(sec){
+  const tipos = sec.productos.map(p => p[0]);
+  for (const t of ["replica","figura","lego","peluche"]) if (tipos.includes(t)) return t;
+  const n = {}; tipos.forEach(t => n[t]=(n[t]||0)+1);
+  return Object.entries(n).sort((a,b)=>b[1]-a[1])[0][0];
+}
 const catalogo = document.getElementById("catalogo");
 catalogo.innerHTML = GRUPOS.map(g => {
   const secs = SECCIONES.filter(s => s.grupo===g.id);
@@ -454,11 +528,16 @@ catalogo.innerHTML = GRUPOS.map(g => {
   <div class="grupo" id="g-${g.id}" data-grupo="${g.id}">
     <h2>${g.nombre.split(" ").length>1 ? g.nombre : `<em>${g.nombre}</em>`}</h2>
     <p>${DESC_GRUPO[g.id]||""}</p>
+    ${secs.length>1 ? `<div class="portadas">${secs.map(sec => `
+      <a class="portada" href="#${sec.id}" style="--c:${sec.color}">
+        ${EMBLEMAS[sec.id] ? `<svg viewBox="0 0 100 100" fill="none" stroke="${sec.color}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="color:${sec.color}" aria-hidden="true">${EMBLEMAS[sec.id]}</svg>` : dibujo(tipoPrincipal(sec), sec.color)}
+        <span class="pie-p"><b>${esc(sec.nombre)}</b><small>${sec.productos.length} productos</small></span>
+      </a>`).join("")}</div>` : ""}
     ${secs.map(sec => `
       <div class="saga" id="${sec.id}" style="--c:${sec.color}">
         <div class="saga-cab">
           <div>
-            ${secs.length>1 ? `<h3>${esc(sec.nombre)}</h3>` : ""}
+            ${secs.length>1 ? `<h3>${esc(sec.nombre)}<span class="n">${sec.productos.length}</span></h3>` : ""}
             <p>${esc(sec.txt)}</p>
           </div>
           <div class="flechas">
@@ -476,26 +555,33 @@ catalogo.addEventListener("click", e => {
   fila.scrollBy({left: fila.clientWidth * 0.9 * Number(b.dataset.mover), behavior:"smooth"});
 });
 
-/* Filtro por grupo */
+/* Pestañas por grupo */
+const ICONO_TAB = {
+  todo:`<rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/>`,
+  sagas:`<path d="M12 2v13" stroke-width="3"/><rect x="9.5" y="15" width="5" height="7" rx="1"/>`,
+  clasicos:`<rect x="3" y="9" width="18" height="12" rx="2"/><path d="M3 9l1.5-5 16 3L20 9M8 4.5l2 4M13 5.5l2 3.5"/>`,
+  series:`<rect x="2" y="5" width="20" height="13" rx="2.5"/><path d="M8 21h8M12 18v3M9 2l3 3 3-3"/>`,
+  rodar:`<rect x="2" y="7" width="20" height="14" rx="3"/><circle cx="12" cy="14" r="4"/><path d="M8 7l1.5-3h5L16 7"/>`,
+  casa:`<rect x="2" y="8" width="20" height="10" rx="3"/><circle cx="8" cy="13" r="3"/><path d="M15 11h4M15 14h3M5 18v2M19 18v2"/>`,
+  libros:`<path d="M12 6c-2.5-2-6-2-9-1v15c3-1 6.5-1 9 1 2.5-2 6-2 9-1V5c-3-1-6.5-1-9 1zM12 6v15"/>`,
+};
 let grupo = "todo", q = "";
 const grupos = document.getElementById("grupos");
-grupos.innerHTML = [{id:"todo",nombre:"Todo"}, ...GRUPOS].map(g =>
-  `<button class="chip" data-g="${g.id}" aria-pressed="${g.id==="todo"}">${g.nombre}</button>`).join("");
+grupos.innerHTML = [{id:"todo",nombre:"Todo"}, ...GRUPOS].map(g => `
+  <button class="tab" role="tab" data-g="${g.id}" aria-selected="${g.id==="todo"}">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONO_TAB[g.id]}</svg>
+    ${g.id==="rodar" ? "Grabar" : g.nombre.replace(" de cine","")}
+  </button>`).join("");
 grupos.addEventListener("click", e => {
-  const b = e.target.closest(".chip"); if(!b) return;
+  const b = e.target.closest(".tab"); if(!b) return;
   grupo = b.dataset.g;
-  grupos.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x===b));
+  grupos.querySelectorAll(".tab").forEach(x => x.setAttribute("aria-selected", x===b));
+  b.scrollIntoView({behavior:"smooth", inline:"center", block:"nearest"});
   if (q) { q=""; document.getElementById("buscar").value=""; }
   pintar();
-  document.getElementById("tienda").scrollIntoView({behavior:"smooth"});
+  const top = document.getElementById("tienda").getBoundingClientRect().top + scrollY - 64;
+  scrollTo({top, behavior:"smooth"});
 });
-
-/* Índice de sagas del grupo visible */
-function pintarIndice(){
-  const secs = SECCIONES.filter(s => grupo==="todo" ? s.grupo==="sagas" || s.grupo==="clasicos" || s.grupo==="series" : s.grupo===grupo);
-  document.getElementById("indice").innerHTML = (q || secs.length<2) ? "" :
-    secs.map(s => `<a href="#${s.id}" style="--c:${s.color}"><i></i>${esc(s.nombre)}</a>`).join("");
-}
 
 /* Buscador */
 const quitarTildes = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
@@ -519,7 +605,6 @@ function pintar(){
     res.style.display = "none";
     vacio.style.display = "none";
   }
-  pintarIndice();
 }
 pintar();
 </script>
