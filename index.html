@@ -173,10 +173,9 @@ section{padding:70px 0}
 .prod h3{font-family:"Abril Fatface",serif;font-weight:400;font-size:21px;line-height:1.15}
 .prod p{color:var(--suave);font-size:14px;flex:1}
 .prod .pie{display:flex;align-items:center;justify-content:space-between;margin-top:8px;gap:10px}
-.precio{font-size:13px;color:var(--suave);white-space:nowrap}
-.precio b{color:var(--texto);font-size:17px}
 .comprar{
-  padding:10px 16px;border-radius:999px;background:var(--cian);color:#04121a;font-weight:700;
+  flex:1;text-align:center;
+  padding:11px 16px;border-radius:999px;background:var(--cian);color:#04121a;font-weight:700;
   text-decoration:none;font-size:14px;white-space:nowrap;transition:.15s
 }
 .comprar:hover{background:#fff}
@@ -293,8 +292,7 @@ footer .marca{font-size:18px}
   <div class="wrap">
     <div class="marca">CELULOIDE CINEMA</div>
     <p class="aviso"><b>Como Afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables.</b>
-      Los enlaces de esta página llevan a Amazon; si compras a través de ellos, a ti no te cuesta más y ayudas a que sigamos haciendo vídeos.
-      Los precios son orientativos y pueden cambiar: el precio que vale es el que ves en Amazon.</p>
+      Los enlaces de esta página llevan a Amazon; si compras a través de ellos, a ti no te cuesta más y ayudas a que sigamos haciendo vídeos.</p>
     <p>© <span id="anio"></span> Celuloide Cinema</p>
   </div>
 </footer>
@@ -311,32 +309,32 @@ footer .marca{font-size:18px}
    ============================================================ */
 const PRODUCTOS = [
   // Grabar como en el cine
-  {cat:"grabar", icono:"gimbal",  nombre:"Estabilizador para el móvil", txt:"El truco del plano que flota, sin trípode ni carro. Lo vimos en el reel del estabilizador.", precio:"desde 79 €", busca:"estabilizador gimbal movil", top:true},
-  {cat:"grabar", icono:"croma",   nombre:"Fondo croma verde plegable",   txt:"El verde de los efectos especiales, para tu habitación. Se monta en un minuto.", precio:"desde 35 €", busca:"fondo croma verde plegable"},
-  {cat:"grabar", icono:"luz",     nombre:"Panel de luz LED RGB",          txt:"Cualquier color de luz, como en los rodajes de noche. Cabe en el bolsillo.", precio:"desde 25 €", busca:"panel led rgb portatil video"},
-  {cat:"grabar", icono:"micro",   nombre:"Micrófono inalámbrico de solapa", txt:"Media película es el sonido. Se engancha a la ropa y se conecta al móvil.", precio:"desde 39 €", busca:"microfono inalambrico solapa movil"},
-  {cat:"grabar", icono:"objetivo",nombre:"Objetivo 50 mm f/1.8",          txt:"El fondo desenfocado del cine, el objetivo más barato que lo consigue.", precio:"desde 120 €", busca:"objetivo 50mm f1.8"},
-  {cat:"grabar", icono:"filtro",  nombre:"Filtro ND variable",             txt:"Para grabar a pleno sol con el movimiento suave de una peli.", precio:"desde 30 €", busca:"filtro nd variable"},
-  {cat:"grabar", icono:"carrete", nombre:"Carrete de película 35 mm",      txt:"Celuloide de verdad. El grano que intentan copiar los filtros.", precio:"desde 15 €", busca:"carrete pelicula 35mm color"},
+  {cat:"grabar", icono:"gimbal",  nombre:"Estabilizador para el móvil", txt:"El truco del plano que flota, sin trípode ni carro. Lo vimos en el reel del estabilizador.", busca:"estabilizador gimbal movil", top:true},
+  {cat:"grabar", icono:"croma",   nombre:"Fondo croma verde plegable",   txt:"El verde de los efectos especiales, para tu habitación. Se monta en un minuto.", busca:"fondo croma verde plegable"},
+  {cat:"grabar", icono:"luz",     nombre:"Panel de luz LED RGB",          txt:"Cualquier color de luz, como en los rodajes de noche. Cabe en el bolsillo.", busca:"panel led rgb portatil video"},
+  {cat:"grabar", icono:"micro",   nombre:"Micrófono inalámbrico de solapa", txt:"Media película es el sonido. Se engancha a la ropa y se conecta al móvil.", busca:"microfono inalambrico solapa movil"},
+  {cat:"grabar", icono:"objetivo",nombre:"Objetivo 50 mm f/1.8",          txt:"El fondo desenfocado del cine, el objetivo más barato que lo consigue.", busca:"objetivo 50mm f1.8"},
+  {cat:"grabar", icono:"filtro",  nombre:"Filtro ND variable",             txt:"Para grabar a pleno sol con el movimiento suave de una peli.", busca:"filtro nd variable"},
+  {cat:"grabar", icono:"carrete", nombre:"Carrete de película 35 mm",      txt:"Celuloide de verdad. El grano que intentan copiar los filtros.", busca:"carrete pelicula 35mm color"},
 
   // Coleccionables de las pelis
-  {cat:"coleccion", icono:"sable", nombre:"Sable láser de colección",       txt:"Con luz y sonido. ¿Te acuerdas de qué estaba hecho el sonido de verdad?", precio:"desde 60 €", busca:"sable laser star wars", top:true},
-  {cat:"coleccion", icono:"casco", nombre:"Casco de Darth Vader",           txt:"Réplica a tamaño real, con la voz. Para la frase que nunca dijo.", precio:"desde 120 €", busca:"casco darth vader replica"},
-  {cat:"coleccion", icono:"dino",  nombre:"T-Rex de Jurassic Park",          txt:"El rugido más famoso del cine, en tu estantería.", precio:"desde 30 €", busca:"figura t-rex jurassic park"},
-  {cat:"coleccion", icono:"latigo",nombre:"Látigo de Indiana Jones",         txt:"El objeto, no el truco: el que de verdad suena al restallar.", precio:"desde 40 €", busca:"latigo indiana jones"},
-  {cat:"coleccion", icono:"murci", nombre:"Batman de colección",             txt:"Con capa de tela. La que en las pelis no deja girar el cuello.", precio:"desde 25 €", busca:"figura batman coleccion"},
-  {cat:"coleccion", icono:"iron",  nombre:"Casco de Iron Man",               txt:"Con apertura motorizada y luz en los ojos.", precio:"desde 90 €", busca:"casco iron man electronico"},
+  {cat:"coleccion", icono:"sable", nombre:"Sable láser de colección",       txt:"Con luz y sonido. ¿Te acuerdas de qué estaba hecho el sonido de verdad?", busca:"sable laser star wars", top:true},
+  {cat:"coleccion", icono:"casco", nombre:"Casco de Darth Vader",           txt:"Réplica a tamaño real, con la voz. Para la frase que nunca dijo.", busca:"casco darth vader replica"},
+  {cat:"coleccion", icono:"dino",  nombre:"T-Rex de Jurassic Park",          txt:"El rugido más famoso del cine, en tu estantería.", busca:"figura t-rex jurassic park"},
+  {cat:"coleccion", icono:"latigo",nombre:"Látigo de Indiana Jones",         txt:"El objeto, no el truco: el que de verdad suena al restallar.", busca:"latigo indiana jones"},
+  {cat:"coleccion", icono:"murci", nombre:"Batman de colección",             txt:"Con capa de tela. La que en las pelis no deja girar el cuello.", busca:"figura batman coleccion"},
+  {cat:"coleccion", icono:"iron",  nombre:"Casco de Iron Man",               txt:"Con apertura motorizada y luz en los ojos.", busca:"casco iron man electronico"},
 
   // Ver pelis en casa
-  {cat:"casa", icono:"proyector", nombre:"Proyector para casa",          txt:"Pantalla de cine en la pared del salón, sin obras.", precio:"desde 150 €", busca:"proyector 4k casa", top:true},
-  {cat:"casa", icono:"disco",     nombre:"Trilogía Matrix en 4K",          txt:"Para ver el tiempo bala con calma y fotograma a fotograma.", precio:"desde 30 €", busca:"matrix trilogia 4k"},
-  {cat:"casa", icono:"palomitas", nombre:"Máquina de palomitas",           txt:"La de los cines de antes, con su carrito.", precio:"desde 40 €", busca:"maquina palomitas cine"},
-  {cat:"casa", icono:"butaca",    nombre:"Pantalla de proyección enrollable", txt:"La diferencia entre proyectar en la pared y verlo de verdad.", precio:"desde 50 €", busca:"pantalla proyeccion enrollable"},
+  {cat:"casa", icono:"proyector", nombre:"Proyector para casa",          txt:"Pantalla de cine en la pared del salón, sin obras.", busca:"proyector 4k casa", top:true},
+  {cat:"casa", icono:"disco",     nombre:"Trilogía Matrix en 4K",          txt:"Para ver el tiempo bala con calma y fotograma a fotograma.", busca:"matrix trilogia 4k"},
+  {cat:"casa", icono:"palomitas", nombre:"Máquina de palomitas",           txt:"La de los cines de antes, con su carrito.", busca:"maquina palomitas cine"},
+  {cat:"casa", icono:"butaca",    nombre:"Pantalla de proyección enrollable", txt:"La diferencia entre proyectar en la pared y verlo de verdad.", busca:"pantalla proyeccion enrollable"},
 
   // Libros de cine
-  {cat:"libros", icono:"libro", nombre:"El cine según Hitchcock",           txt:"Las conversaciones con Truffaut: el libro que leen todos los directores.", precio:"desde 25 €", busca:"el cine segun hitchcock truffaut"},
-  {cat:"libros", icono:"libro", nombre:"En el momento del parpadeo",         txt:"Walter Murch explica por qué se corta un plano justo ahí.", precio:"desde 18 €", busca:"walter murch en el momento del parpadeo"},
-  {cat:"libros", icono:"libro", nombre:"Los Simpson: el arte",              txt:"Por qué son amarillos y otras decisiones que nadie te contó.", precio:"desde 30 €", busca:"libro arte los simpson"},
+  {cat:"libros", icono:"libro", nombre:"El cine según Hitchcock",           txt:"Las conversaciones con Truffaut: el libro que leen todos los directores.", busca:"el cine segun hitchcock truffaut"},
+  {cat:"libros", icono:"libro", nombre:"En el momento del parpadeo",         txt:"Walter Murch explica por qué se corta un plano justo ahí.", busca:"walter murch en el momento del parpadeo"},
+  {cat:"libros", icono:"libro", nombre:"Los Simpson: el arte",              txt:"Por qué son amarillos y otras decisiones que nadie te contó.", busca:"libro arte los simpson"},
 ];
 
 const CATEGORIAS = [
@@ -426,7 +424,6 @@ function pintar(){
         <h3>${p.nombre}</h3>
         <p>${p.txt}</p>
         <div class="pie">
-          <span class="precio"><b>${p.precio}</b></span>
           <a class="comprar" href="${enlace(p)}" ${attrs}>Ver en Amazon</a>
         </div>
       </div>
