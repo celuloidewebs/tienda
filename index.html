@@ -277,8 +277,8 @@ section{padding:70px 0}
 .saga-cab .cuantos{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--c);
   border:1px solid color-mix(in srgb, var(--c) 50%, transparent);padding:3px 9px;border-radius:999px;font-weight:700}
 .saga-cab p{display:none}
-.rejilla{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
-.saga:not(.abierta) .rejilla > .caja:nth-child(n+6){display:none}
+.rejilla{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.saga:not(.abierta) .rejilla > .caja:nth-child(n+5){display:none}
 .caja{
   display:flex;flex-direction:column;background:var(--panel);
   border:1px solid var(--linea);border-radius:18px;overflow:hidden;
@@ -326,7 +326,6 @@ section{padding:70px 0}
 .ver-todos:hover{background:color-mix(in srgb, var(--c) 18%, transparent);border-color:var(--c)}
 .saga.pocos .ver-todos{display:none}
 #resultados .rejilla > .caja{display:flex !important}
-@media (max-width:1100px){ .rejilla{grid-template-columns:repeat(3,1fr)} }
 @media (max-width:860px){
   .rejilla{grid-template-columns:repeat(2,1fr);gap:12px}
   .caja{border-radius:14px}
@@ -666,7 +665,7 @@ catalogo.innerHTML = GRUPOS.map(g => {
         <span class="pie-p"><b>${esc(sec.nombre)}</b><small>${sec.productos.length} productos</small></span>
       </a>`).join("")}</div>` : ""}
     ${secs.map(sec => `
-      <div class="saga${sec.productos.length<=5?" pocos":""}" id="${sec.id}" style="--c:${sec.color};--tinta:${tinta(sec.color)}">
+      <div class="saga${sec.productos.length<=4?" pocos":""}" id="${sec.id}" style="--c:${sec.color};--tinta:${tinta(sec.color)}">
         <div class="saga-cab">
           <h3 class="titulo-saga">${esc(sec.nombre)}</h3>
           <span class="cuantos">${sec.productos.length} productos</span>
