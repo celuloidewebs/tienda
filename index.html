@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tienda Celuloide Cinema</title>
-<meta name="description" content="Lo que sale en los reels de Celuloide Cinema, para tenerlo en casa: cámaras, luz, coleccionables y libros de cine.">
+<meta name="description" content="La tienda de Celuloide Cinema: productos de tus sagas, clásicos y series favoritas, y lo que usamos para grabar los reels.">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png?v=2">
 <link rel="icon" type="image/png" sizes="512x512" href="icono-512.png?v=2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=2">
@@ -163,7 +163,7 @@ section{padding:70px 0}
   background:radial-gradient(circle at 50% 40%, var(--c1,rgba(41,217,241,.25)), transparent 65%), var(--noche-2);
 }
 .prod .img img{max-width:78%;max-height:82%;object-fit:contain}
-.prod .img svg{width:44%;height:auto}
+.prod .img svg{width:40%;height:auto}
 .etq{
   position:absolute;top:12px;left:12px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;
   background:var(--noche);border:1px solid var(--linea);padding:4px 9px;border-radius:999px;color:var(--suave)
@@ -180,6 +180,62 @@ section{padding:70px 0}
 }
 .comprar:hover{background:#fff}
 .vacio-msg{color:var(--suave);padding:40px 0;text-align:center;display:none}
+
+
+/* Navegación de la tienda */
+.secnav{
+  position:sticky;top:64px;z-index:15;
+  background:rgba(13,20,36,.94);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--linea);padding:12px 0;
+}
+.secnav .wrap{display:flex;gap:10px;align-items:center;overflow-x:auto;scrollbar-width:none}
+.secnav .wrap::-webkit-scrollbar{display:none}
+.secnav .chip{white-space:nowrap;flex:none}
+.indice{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 10px}
+.indice a{
+  text-decoration:none;font-size:13px;padding:6px 12px;border-radius:999px;
+  border:1px solid var(--linea);color:var(--suave);transition:.15s;display:inline-flex;align-items:center;gap:7px
+}
+.indice a i{width:8px;height:8px;border-radius:50%;background:var(--c);display:inline-block}
+.indice a:hover{color:var(--texto);border-color:var(--c)}
+
+/* Grupos y sagas */
+.grupo{padding-top:34px}
+.grupo > h2{
+  font-family:"Abril Fatface",serif;font-weight:400;font-size:clamp(34px,5vw,58px);line-height:1;
+  margin-bottom:6px
+}
+.grupo > h2 em{font-style:normal;color:var(--cian);text-transform:uppercase}
+.grupo > p{color:var(--suave);margin-bottom:8px}
+.saga{margin-top:34px;scroll-margin-top:140px}
+.saga-cab{
+  display:flex;align-items:end;justify-content:space-between;gap:16px;
+  border-left:5px solid var(--c);padding-left:14px;margin-bottom:16px
+}
+.saga-cab h3{font-family:"Abril Fatface",serif;font-weight:400;font-size:clamp(24px,3vw,34px);line-height:1.05}
+.saga-cab p{color:var(--suave);font-size:14px;margin-top:4px}
+.saga-cab .n{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--c);white-space:nowrap}
+.flechas{display:flex;gap:6px;flex:none}
+.flechas button{
+  width:38px;height:38px;border-radius:50%;border:1px solid var(--linea);background:var(--noche);
+  color:var(--texto);font-size:18px;cursor:pointer;transition:.15s
+}
+.flechas button:hover{border-color:var(--c);color:var(--c)}
+.fila{
+  display:grid;grid-auto-flow:column;grid-auto-columns:240px;gap:16px;
+  overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 14px;
+  scrollbar-width:thin;scrollbar-color:var(--linea) transparent;
+}
+.fila .prod{scroll-snap-align:start}
+.prod .img{background:radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--c, #29d9f1) 30%, transparent), transparent 65%), var(--noche-2)}
+.prod .tipo{
+  position:absolute;top:12px;left:12px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+  background:var(--noche);border:1px solid var(--linea);padding:4px 9px;border-radius:999px;color:var(--suave)
+}
+.prod .de{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--c)}
+#resultados{display:none}
+#resultados .grid{margin-top:0}
+.cuenta{color:var(--suave);font-size:14px;margin-top:4px}
 
 /* Banda */
 .banda{
@@ -198,6 +254,8 @@ footer .marca{font-size:18px}
 
 /* Móvil */
 @media (max-width:860px){
+  .flechas{display:none}
+  .fila{grid-auto-columns:72%}
   .hero{padding:50px 0 50px}
   .hero .wrap{grid-template-columns:1fr}
   .claqueta{max-width:240px;order:-1}
@@ -216,8 +274,10 @@ footer .marca{font-size:18px}
   <div class="wrap">
     <a class="marca" href="#">CELULOIDE<br>CINEMA<small>LA TIENDA</small></a>
     <nav>
-      <a href="#reels">De los reels</a>
-      <a href="#tienda">Tienda</a>
+      <a href="#g-sagas">Sagas</a>
+      <a href="#g-clasicos">Clásicos</a>
+      <a href="#g-series">Series</a>
+      <a href="#g-rodar">Grabar</a>
       <a href="https://www.instagram.com/celuloidecinema" target="_blank" rel="noopener">Instagram</a>
     </nav>
   </div>
@@ -230,10 +290,10 @@ footer .marca{font-size:18px}
     <div>
       <div class="eyebrow">Lo que sale en los reels</div>
       <h1>El cine, <em>en tu casa</em></h1>
-      <p class="lead">Las cámaras, la luz y los objetos de las pelis de las que hablamos. Elegidos uno a uno, para ver, grabar y coleccionar.</p>
+      <p class="lead">Sagas, clásicos y series: réplicas, figuras, LEGO, pelis en 4K y libros. Y lo que usamos para grabar los reels.</p>
       <div class="btns">
         <a class="btn lleno" href="#tienda">Ver la tienda</a>
-        <a class="btn vacio" href="#reels">Del reel a tu casa</a>
+        <a class="btn vacio" href="#g-sagas">Ver las sagas</a>
       </div>
     </div>
     <svg class="claqueta" viewBox="0 0 220 200" aria-hidden="true">
@@ -268,14 +328,21 @@ footer .marca{font-size:18px}
   </div>
 </section>
 
-<section id="tienda" style="background:var(--noche-2)">
+<section id="tienda" style="background:var(--noche-2);padding-top:0">
+  <nav class="secnav" aria-label="Secciones de la tienda">
+    <div class="wrap" id="grupos" role="group"></div>
+  </nav>
   <div class="wrap">
-    <div class="titulo-sec">
-      <h2>La <em>tienda</em></h2>
-      <input class="buscar" id="buscar" type="search" placeholder="Buscar: sable, proyector, croma…" aria-label="Buscar productos">
+    <div class="titulo-sec" style="margin-top:40px;margin-bottom:10px">
+      <div>
+        <h2>La <em>tienda</em></h2>
+        <p class="cuenta" id="cuenta"></p>
+      </div>
+      <input class="buscar" id="buscar" type="search" placeholder="Buscar: Batman, LEGO, vinilo…" aria-label="Buscar productos">
     </div>
-    <div class="filtros" id="filtros" role="group" aria-label="Categorías"></div>
-    <div class="grid" id="grid"></div>
+    <div class="indice" id="indice"></div>
+    <div id="catalogo"></div>
+    <div id="resultados"><div class="grid" id="grid"></div></div>
     <p class="vacio-msg" id="vacio">No hay nada con eso. Prueba otra palabra.</p>
   </div>
 </section>
@@ -297,138 +364,162 @@ footer .marca{font-size:18px}
   </div>
 </footer>
 
+<script src="productos.js"></script>
 <script>
-/* ============================================================
-   PRODUCTOS
-   Para añadir uno, copia una línea y cambia los datos.
-   - asin: el código del producto en Amazon (lo ves en la URL: /dp/XXXXXXXXXX).
-           Si lo pones, el botón va directo al producto.
-   - busca: si no hay asin, el botón abre la búsqueda en Amazon con estas palabras.
-   - img:  opcional, la imagen que te da Amazon (SiteStripe → Imagen). Si no, sale el dibujo.
-   - top:  true para marcarlo como «El favorito».
-   ============================================================ */
-const PRODUCTOS = [
-  // Grabar como en el cine
-  {cat:"grabar", icono:"gimbal",  nombre:"Estabilizador para el móvil", txt:"El truco del plano que flota, sin trípode ni carro. Lo vimos en el reel del estabilizador.", busca:"estabilizador gimbal movil", top:true},
-  {cat:"grabar", icono:"croma",   nombre:"Fondo croma verde plegable",   txt:"El verde de los efectos especiales, para tu habitación. Se monta en un minuto.", busca:"fondo croma verde plegable"},
-  {cat:"grabar", icono:"luz",     nombre:"Panel de luz LED RGB",          txt:"Cualquier color de luz, como en los rodajes de noche. Cabe en el bolsillo.", busca:"panel led rgb portatil video"},
-  {cat:"grabar", icono:"micro",   nombre:"Micrófono inalámbrico de solapa", txt:"Media película es el sonido. Se engancha a la ropa y se conecta al móvil.", busca:"microfono inalambrico solapa movil"},
-  {cat:"grabar", icono:"objetivo",nombre:"Objetivo 50 mm f/1.8",          txt:"El fondo desenfocado del cine, el objetivo más barato que lo consigue.", busca:"objetivo 50mm f1.8"},
-  {cat:"grabar", icono:"filtro",  nombre:"Filtro ND variable",             txt:"Para grabar a pleno sol con el movimiento suave de una peli.", busca:"filtro nd variable"},
-  {cat:"grabar", icono:"carrete", nombre:"Carrete de película 35 mm",      txt:"Celuloide de verdad. El grano que intentan copiar los filtros.", busca:"carrete pelicula 35mm color"},
-
-  // Coleccionables de las pelis
-  {cat:"coleccion", icono:"sable", nombre:"Sable láser de colección",       txt:"Con luz y sonido. ¿Te acuerdas de qué estaba hecho el sonido de verdad?", busca:"sable laser star wars", top:true},
-  {cat:"coleccion", icono:"casco", nombre:"Casco de Darth Vader",           txt:"Réplica a tamaño real, con la voz. Para la frase que nunca dijo.", busca:"casco darth vader replica"},
-  {cat:"coleccion", icono:"dino",  nombre:"T-Rex de Jurassic Park",          txt:"El rugido más famoso del cine, en tu estantería.", busca:"figura t-rex jurassic park"},
-  {cat:"coleccion", icono:"latigo",nombre:"Látigo de Indiana Jones",         txt:"El objeto, no el truco: el que de verdad suena al restallar.", busca:"latigo indiana jones"},
-  {cat:"coleccion", icono:"murci", nombre:"Batman de colección",             txt:"Con capa de tela. La que en las pelis no deja girar el cuello.", busca:"figura batman coleccion"},
-  {cat:"coleccion", icono:"iron",  nombre:"Casco de Iron Man",               txt:"Con apertura motorizada y luz en los ojos.", busca:"casco iron man electronico"},
-
-  // Ver pelis en casa
-  {cat:"casa", icono:"proyector", nombre:"Proyector para casa",          txt:"Pantalla de cine en la pared del salón, sin obras.", busca:"proyector 4k casa", top:true},
-  {cat:"casa", icono:"disco",     nombre:"Trilogía Matrix en 4K",          txt:"Para ver el tiempo bala con calma y fotograma a fotograma.", busca:"matrix trilogia 4k"},
-  {cat:"casa", icono:"palomitas", nombre:"Máquina de palomitas",           txt:"La de los cines de antes, con su carrito.", busca:"maquina palomitas cine"},
-  {cat:"casa", icono:"butaca",    nombre:"Pantalla de proyección enrollable", txt:"La diferencia entre proyectar en la pared y verlo de verdad.", busca:"pantalla proyeccion enrollable"},
-
-  // Libros de cine
-  {cat:"libros", icono:"libro", nombre:"El cine según Hitchcock",           txt:"Las conversaciones con Truffaut: el libro que leen todos los directores.", busca:"el cine segun hitchcock truffaut"},
-  {cat:"libros", icono:"libro", nombre:"En el momento del parpadeo",         txt:"Walter Murch explica por qué se corta un plano justo ahí.", busca:"walter murch en el momento del parpadeo"},
-  {cat:"libros", icono:"libro", nombre:"Los Simpson: el arte",              txt:"Por qué son amarillos y otras decisiones que nadie te contó.", busca:"libro arte los simpson"},
-];
-
-const CATEGORIAS = [
-  {id:"todo",      nombre:"Todo"},
-  {id:"grabar",    nombre:"Grabar como en el cine"},
-  {id:"coleccion", nombre:"Coleccionables"},
-  {id:"casa",      nombre:"Cine en casa"},
-  {id:"libros",    nombre:"Libros de cine"},
-];
-
-// Las tarjetas grandes de «Del reel a tu casa»
-const REELS = [
-  {titulo:"El sable láser", reel:"¿De qué estaba hecho su sonido?", icono:"sable", busca:"sable laser star wars", color:"#29d9f1"},
-  {titulo:"El croma verde", reel:"¿Por qué verde y no azul?",        icono:"croma", busca:"fondo croma verde plegable", color:"#3ee07a"},
-  {titulo:"El tiempo bala", reel:"¿Cómo se rodó Matrix?",            icono:"disco", busca:"matrix trilogia 4k", color:"#7cff9b"},
-  {titulo:"El T-Rex",       reel:"¿De qué animal es el rugido?",     icono:"dino",  busca:"figura t-rex jurassic park", color:"#f2c14e"},
-];
-
-/* ---------- Dibujos (sin imágenes de terceros) ---------- */
+/* ---------- Dibujos por tipo de producto (sin imágenes de terceros) ---------- */
 const ICONOS = {
-  gimbal:`<path d="M50 8v22M38 30h24v10H38zM50 40v18M30 58h40l-6 34H36z" />`,
+  figura:`<circle cx="50" cy="20" r="10"/><path d="M36 36h28l4 26h-8l-2 30H42l-2-30h-8z"/>`,
+  funko:`<rect x="24" y="10" width="52" height="44" rx="16"/><circle cx="40" cy="34" r="4" fill="currentColor"/><circle cx="60" cy="34" r="4" fill="currentColor"/><path d="M38 54h24v22H38zM40 76v14M60 76v14M32 90h36"/>`,
+  lego:`<rect x="14" y="40" width="72" height="40" rx="4"/><rect x="22" y="28" width="14" height="12" rx="2"/><rect x="43" y="28" width="14" height="12" rx="2"/><rect x="64" y="28" width="14" height="12" rx="2"/>`,
+  replica:`<path d="M24 86h52M30 86V78h40v8"/><rect x="26" y="14" width="48" height="64" rx="3" opacity=".6"/><path d="M50 26l10 14-10 22-10-22z" fill="currentColor" opacity=".55"/>`,
+  disco:`<circle cx="50" cy="50" r="38"/><circle cx="50" cy="50" r="8"/><path d="M50 22a28 28 0 0 1 28 28" opacity=".5"/>`,
+  poster:`<rect x="20" y="10" width="60" height="80" rx="3"/><path d="M28 74l16-22 10 12 8-8 12 18z" fill="currentColor" opacity=".5"/><circle cx="62" cy="30" r="6"/>`,
+  libro:`<path d="M50 24c-10-8-24-8-36-4v62c12-4 26-4 36 4 10-8 24-8 36-4V20c-12-4-26-4-36 4zM50 24v62"/>`,
+  taza:`<path d="M20 30h48v38a16 16 0 0 1-16 16H36a16 16 0 0 1-16-16z"/><path d="M68 40h6a10 10 0 0 1 0 20h-6"/><path d="M34 14c0 6 6 6 6 12M48 14c0 6 6 6 6 12" opacity=".6"/>`,
+  ropa:`<path d="M36 14l-22 12 8 18 10-4v46h36V40l10 4 8-18-22-12c-2 8-8 12-14 12s-12-4-14-12z"/>`,
+  juego:`<rect x="16" y="30" width="44" height="44" rx="8" transform="rotate(-12 38 52)"/><rect x="48" y="22" width="36" height="36" rx="7" transform="rotate(14 66 40)"/><g fill="currentColor" stroke="none"><circle cx="30" cy="48" r="3.5"/><circle cx="44" cy="58" r="3.5"/><circle cx="66" cy="40" r="3.5"/></g>`,
+  vinilo:`<circle cx="44" cy="54" r="34"/><circle cx="44" cy="54" r="24" opacity=".4"/><circle cx="44" cy="54" r="10" fill="currentColor" opacity=".5"/><path d="M84 12v40l-22 18"/>`,
+  lampara:`<path d="M50 10a26 26 0 0 0-14 48v12h28V58a26 26 0 0 0-14-48z"/><path d="M38 80h24M42 90h16"/>`,
+  peluche:`<circle cx="26" cy="26" r="10"/><circle cx="74" cy="26" r="10"/><circle cx="50" cy="52" r="32"/><circle cx="40" cy="46" r="3.5" fill="currentColor"/><circle cx="60" cy="46" r="3.5" fill="currentColor"/><ellipse cx="50" cy="62" rx="10" ry="7"/>`,
+  puzzle:`<path d="M20 30h18a8 8 0 1 1 16 0h18v18a8 8 0 1 1 0 16v18H54a8 8 0 1 0-16 0H20V64a8 8 0 1 0 0-16z"/>`,
+  camara:`<rect x="12" y="30" width="76" height="50" rx="8"/><circle cx="50" cy="55" r="15"/><path d="M34 30l6-10h20l6 10"/><circle cx="76" cy="40" r="3" fill="currentColor"/>`,
+  gimbal:`<path d="M50 8v22M38 30h24v10H38zM50 40v18M30 58h40l-6 34H36z"/>`,
   croma:`<rect x="14" y="16" width="72" height="52" rx="4" fill="#3ee07a" stroke="none" opacity=".85"/><path d="M14 16h72v52H14zM30 68l-8 24M70 68l8 24"/>`,
   luz:`<rect x="18" y="22" width="64" height="44" rx="6"/><g stroke="none" fill="currentColor" opacity=".7"><circle cx="34" cy="38" r="5"/><circle cx="50" cy="38" r="5"/><circle cx="66" cy="38" r="5"/><circle cx="34" cy="52" r="5"/><circle cx="50" cy="52" r="5"/><circle cx="66" cy="52" r="5"/></g><path d="M50 66v20M36 86h28"/>`,
   micro:`<rect x="38" y="10" width="24" height="44" rx="12"/><path d="M28 44a22 22 0 0 0 44 0M50 66v20M36 86h28"/>`,
   objetivo:`<circle cx="50" cy="50" r="36"/><circle cx="50" cy="50" r="24"/><circle cx="50" cy="50" r="10" fill="currentColor" opacity=".5"/>`,
   filtro:`<circle cx="50" cy="50" r="36"/><path d="M22 50a28 28 0 0 1 56 0" fill="currentColor" opacity=".35" stroke="none"/><circle cx="50" cy="50" r="30"/>`,
   carrete:`<rect x="26" y="18" width="48" height="66" rx="6"/><path d="M26 30h48M26 72h48"/><rect x="74" y="36" width="18" height="30"/><path d="M78 40v22M84 40v22"/>`,
-  sable:`<path d="M50 6v58" stroke-width="9" stroke="currentColor" opacity=".9"/><rect x="43" y="64" width="14" height="26" rx="2" fill="#9fb0c8" stroke="#9fb0c8"/><path d="M43 72h14M43 80h14" stroke="#070b14"/>`,
-  casco:`<path d="M20 70V44a30 30 0 0 1 60 0v26l8 18H12z"/><path d="M34 52h12l-4 10H32zM54 52h12l2 10H58z" fill="currentColor"/><path d="M42 74l8-6 8 6v14H42z"/>`,
-  dino:`<path d="M14 48l18-20h30l12 10h12v14H70l-6 8 8 26H60l-6-18H40l-4 18H26l2-24-14-6z"/><circle cx="66" cy="38" r="2.5" fill="currentColor"/><path d="M74 52l4 6M80 52l2 6"/>`,
-  latigo:`<path d="M20 84l14-14" stroke-width="8"/><path d="M34 70c20-20 50-8 50-30S56 20 40 30" fill="none"/>`,
-  murci:`<path d="M10 40c10 0 14 6 14 6s4-12 14-12l4-10 4 8h8l4-8 4 10c10 0 14 12 14 12s4-6 14-6c-6 8-6 20-6 20s-10-6-16 4c-4-6-10-6-12 2-2-8-8-8-12-2-6-10-16-4-16-4s0-12-6-20z"/>`,
-  iron:`<path d="M22 30c0-14 12-22 28-22s28 8 28 22v34l-14 26H36L22 64z"/><path d="M30 44h16l-4 8H32zM54 44h16l-2 8H58z" fill="currentColor"/><path d="M38 76h24"/>`,
   proyector:`<rect x="12" y="36" width="76" height="36" rx="8"/><circle cx="34" cy="54" r="11"/><circle cx="34" cy="54" r="4" fill="currentColor"/><path d="M60 48h20M60 58h14M22 72v8M78 72v8"/>`,
-  disco:`<circle cx="50" cy="50" r="38"/><circle cx="50" cy="50" r="8"/><path d="M50 22a28 28 0 0 1 28 28" opacity=".5"/>`,
   palomitas:`<path d="M26 40h48l-8 50H34z"/><path d="M38 40l2 50M50 40v50M62 40l-2 50"/><path d="M26 40c-4-12 8-18 14-12 2-10 18-10 20 0 6-6 18 0 14 12"/>`,
-  butaca:`<path d="M24 50V26a8 8 0 0 1 8-8h36a8 8 0 0 1 8 8v24"/><rect x="14" y="48" width="12" height="28" rx="4"/><rect x="74" y="48" width="12" height="28" rx="4"/><path d="M26 58h48v18H26zM22 76v12M78 76v12"/>`,
-  libro:`<path d="M50 24c-10-8-24-8-36-4v62c12-4 26-4 36 4 10-8 24-8 36-4V20c-12-4-26-4-36 4zM50 24v62"/>`,
 };
-const dibujo = (k, color="var(--cian)") =>
-  `<svg viewBox="0 0 100 100" fill="none" stroke="${color}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="color:${color}" aria-hidden="true">${ICONOS[k]||ICONOS.carrete}</svg>`;
+const NOMBRE_TIPO = {figura:"Figura",funko:"Funko",lego:"LEGO",replica:"Réplica",disco:"Peli",poster:"Póster",libro:"Libro",taza:"Taza",ropa:"Ropa",juego:"Juego",vinilo:"Música",lampara:"Lámpara",peluche:"Peluche",puzzle:"Puzle",camara:"Cámara",gimbal:"Grabar",croma:"Grabar",luz:"Luz",micro:"Sonido",objetivo:"Objetivo",filtro:"Filtro",carrete:"Película",proyector:"Cine en casa",palomitas:"Cine en casa"};
+const dibujo = (k, color) =>
+  `<svg viewBox="0 0 100 100" fill="none" stroke="${color}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="color:${color}" aria-hidden="true">${ICONOS[k]||ICONOS.disco}</svg>`;
 
 /* ---------- Enlaces de afiliado ---------- */
-const enlace = p => p.asin
-  ? `${AMAZON}/dp/${p.asin}?tag=${encodeURIComponent(TAG)}`
-  : `${AMAZON}/s?k=${encodeURIComponent(p.busca)}&tag=${encodeURIComponent(TAG)}`;
+const enlace = (busca, asin) => asin
+  ? `${AMAZON}/dp/${asin}?tag=${encodeURIComponent(TAG)}`
+  : `${AMAZON}/s?k=${encodeURIComponent(busca)}&tag=${encodeURIComponent(TAG)}`;
 const attrs = `target="_blank" rel="nofollow sponsored noopener"`;
+const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ---------- Todos los productos en una lista ---------- */
+const TODOS = SECCIONES.flatMap(sec => sec.productos.map(([tipo,nombre,txt,busca,asin]) =>
+  ({tipo,nombre,txt,busca,asin,sec})));
+
+const tarjeta = (p, conSaga=false) => `
+  <article class="prod" style="--c:${p.sec.color}">
+    <div class="img">
+      <span class="tipo">${NOMBRE_TIPO[p.tipo]||"Cine"}</span>
+      ${dibujo(p.tipo, p.sec.color)}
+    </div>
+    <div class="cuerpo">
+      ${conSaga ? `<span class="de">${esc(p.sec.nombre)}</span>` : ""}
+      <h3>${esc(p.nombre)}</h3>
+      <p>${esc(p.txt)}</p>
+      <div class="pie"><a class="comprar" href="${enlace(p.busca,p.asin)}" ${attrs}>Ver en Amazon</a></div>
+    </div>
+  </article>`;
 
 /* ---------- Pintar ---------- */
 document.getElementById("anio").textContent = new Date().getFullYear();
+document.getElementById("cuenta").textContent = `${TODOS.length} productos en ${SECCIONES.length} secciones`;
 
-document.getElementById("reels-grid").innerHTML = REELS.map(r => `
-  <a class="reel" href="${enlace(r)}" ${attrs}>
-    <div class="fondo">${dibujo(r.icono, r.color)}</div>
+const secPorId = Object.fromEntries(SECCIONES.map(s => [s.id, s]));
+document.getElementById("reels-grid").innerHTML = REELS.map(r => {
+  const c = (secPorId[r.saga]||{}).color || "#29d9f1";
+  return `
+  <a class="reel" href="${enlace(r.busca)}" ${attrs}>
+    <div class="fondo">${dibujo(r.tipo, c)}</div>
     <div class="txt">
       <div class="pre">En el reel</div>
       <h3>${r.titulo}</h3>
       <div class="ver">${r.reel}<br><b>Verlo en Amazon →</b></div>
     </div>
-  </a>`).join("");
+  </a>`}).join("");
 
-let cat = "todo", q = "";
-const filtros = document.getElementById("filtros");
-filtros.innerHTML = CATEGORIAS.map(c =>
-  `<button class="chip" data-cat="${c.id}" aria-pressed="${c.id==="todo"}">${c.nombre}</button>`).join("");
-filtros.addEventListener("click", e => {
-  const b = e.target.closest(".chip"); if(!b) return;
-  cat = b.dataset.cat;
-  filtros.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x===b));
-  pintar();
-});
-document.getElementById("buscar").addEventListener("input", e => { q = e.target.value.trim().toLowerCase(); pintar(); });
-
-const quitarTildes = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"");
-function pintar(){
-  const nq = quitarTildes(q);
-  const lista = PRODUCTOS.filter(p =>
-    (cat==="todo" || p.cat===cat) &&
-    (!nq || quitarTildes((p.nombre+" "+p.txt+" "+(p.busca||"")).toLowerCase()).includes(nq)));
-  document.getElementById("grid").innerHTML = lista.map(p => `
-    <article class="prod">
-      <div class="img">
-        ${p.top ? `<span class="etq top">El favorito</span>` : `<span class="etq">${CATEGORIAS.find(c=>c.id===p.cat).nombre}</span>`}
-        ${p.img ? `<img src="${p.img}" alt="${p.nombre}" loading="lazy">` : dibujo(p.icono)}
-      </div>
-      <div class="cuerpo">
-        <h3>${p.nombre}</h3>
-        <p>${p.txt}</p>
-        <div class="pie">
-          <a class="comprar" href="${enlace(p)}" ${attrs}>Ver en Amazon</a>
+const DESC_GRUPO = {
+  sagas:"Las que vuelves a ver cada año.",
+  clasicos:"Las que salen en todas las listas.",
+  series:"Para los que maratonean.",
+  rodar:"Lo que usamos para grabar los reels.",
+  casa:"La sala de cine, sin salir del salón.",
+  libros:"Para saber más que el de al lado.",
+};
+const catalogo = document.getElementById("catalogo");
+catalogo.innerHTML = GRUPOS.map(g => {
+  const secs = SECCIONES.filter(s => s.grupo===g.id);
+  return `
+  <div class="grupo" id="g-${g.id}" data-grupo="${g.id}">
+    <h2>${g.nombre.split(" ").length>1 ? g.nombre : `<em>${g.nombre}</em>`}</h2>
+    <p>${DESC_GRUPO[g.id]||""}</p>
+    ${secs.map(sec => `
+      <div class="saga" id="${sec.id}" style="--c:${sec.color}">
+        <div class="saga-cab">
+          <div>
+            ${secs.length>1 ? `<h3>${esc(sec.nombre)}</h3>` : ""}
+            <p>${esc(sec.txt)}</p>
+          </div>
+          <div class="flechas">
+            <button type="button" data-mover="-1" aria-label="Anteriores">‹</button>
+            <button type="button" data-mover="1" aria-label="Siguientes">›</button>
+          </div>
         </div>
-      </div>
-    </article>`).join("");
-  document.getElementById("vacio").style.display = lista.length ? "none" : "block";
+        <div class="fila">${sec.productos.map(([tipo,nombre,txt,busca,asin]) => tarjeta({tipo,nombre,txt,busca,asin,sec})).join("")}</div>
+      </div>`).join("")}
+  </div>`}).join("");
+
+catalogo.addEventListener("click", e => {
+  const b = e.target.closest("[data-mover]"); if(!b) return;
+  const fila = b.closest(".saga").querySelector(".fila");
+  fila.scrollBy({left: fila.clientWidth * 0.9 * Number(b.dataset.mover), behavior:"smooth"});
+});
+
+/* Filtro por grupo */
+let grupo = "todo", q = "";
+const grupos = document.getElementById("grupos");
+grupos.innerHTML = [{id:"todo",nombre:"Todo"}, ...GRUPOS].map(g =>
+  `<button class="chip" data-g="${g.id}" aria-pressed="${g.id==="todo"}">${g.nombre}</button>`).join("");
+grupos.addEventListener("click", e => {
+  const b = e.target.closest(".chip"); if(!b) return;
+  grupo = b.dataset.g;
+  grupos.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x===b));
+  if (q) { q=""; document.getElementById("buscar").value=""; }
+  pintar();
+  document.getElementById("tienda").scrollIntoView({behavior:"smooth"});
+});
+
+/* Índice de sagas del grupo visible */
+function pintarIndice(){
+  const secs = SECCIONES.filter(s => grupo==="todo" ? s.grupo==="sagas" || s.grupo==="clasicos" || s.grupo==="series" : s.grupo===grupo);
+  document.getElementById("indice").innerHTML = (q || secs.length<2) ? "" :
+    secs.map(s => `<a href="#${s.id}" style="--c:${s.color}"><i></i>${esc(s.nombre)}</a>`).join("");
+}
+
+/* Buscador */
+const quitarTildes = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+document.getElementById("buscar").addEventListener("input", e => { q = e.target.value.trim(); pintar(); });
+
+function pintar(){
+  document.querySelectorAll(".grupo").forEach(el =>
+    el.style.display = (grupo==="todo" || el.dataset.grupo===grupo) ? "" : "none");
+  const res = document.getElementById("resultados");
+  const vacio = document.getElementById("vacio");
+  if (q) {
+    const nq = quitarTildes(q);
+    const lista = TODOS.filter(p => (grupo==="todo" || p.sec.grupo===grupo) &&
+      quitarTildes([p.nombre,p.txt,p.busca,p.sec.nombre,NOMBRE_TIPO[p.tipo]||""].join(" ")).includes(nq));
+    catalogo.style.display = "none";
+    res.style.display = "block";
+    document.getElementById("grid").innerHTML = lista.map(p => tarjeta(p,true)).join("");
+    vacio.style.display = lista.length ? "none" : "block";
+  } else {
+    catalogo.style.display = "";
+    res.style.display = "none";
+    vacio.style.display = "none";
+  }
+  pintarIndice();
 }
 pintar();
 </script>
