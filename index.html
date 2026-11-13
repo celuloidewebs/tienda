@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tienda Celuloide Cinema</title>
+<meta name="description" content="Lo que sale en los reels de Celuloide Cinema, para tenerlo en casa: cámaras, luz, coleccionables y libros de cine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courier+Prime:wght@400;700&family=Dela+Gothic+One&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CONFIGURACIÓN — lo único que hay que tocar
+   ============================================================ */
+</style>
+<script>
+  // Tu ID de afiliado de Amazon (termina en -21). Cámbialo aquí y vale para todos los enlaces.
+  const TAG = "TU-TAG-21";
+  const AMAZON = "https://www.amazon.es";
+</script>
+<style>
+:root{
+  --cian:#29d9f1;
+  --cian-osc:#0fa8bf;
+  --noche:#070b14;
+  --noche-2:#0d1424;
+  --panel:#111a2e;
+  --linea:#1e2a44;
+  --texto:#eef4fb;
+  --suave:#9fb0c8;
+  --oro:#f2c14e;
+  --rojo:#ff4d5e;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--noche);
+  color:var(--texto);
+  font-family:"Courier Prime",ui-monospace,monospace;
+  font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* Tira de película */
+.tira{
+  height:22px;
+  background:
+    radial-gradient(circle at 50% 50%, var(--noche) 0 4px, transparent 4.5px) 0 0/22px 22px,
+    #000;
+  border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a;
+}
+
+/* Cabecera */
+header.top{
+  position:sticky;top:0;z-index:20;
+  background:rgba(7,11,20,.88);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--linea);
+}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.marca{
+  font-family:"Dela Gothic One",sans-serif;color:var(--cian);
+  text-decoration:none;font-size:20px;letter-spacing:.02em;line-height:.95;
+}
+.marca small{display:block;font-size:11px;letter-spacing:.3em;color:var(--suave);font-family:"Courier Prime",monospace;margin-top:4px}
+.top nav{display:flex;gap:22px;font-size:14px}
+.top nav a{text-decoration:none;color:var(--suave)}
+.top nav a:hover{color:var(--cian)}
+
+/* Portada */
+.hero{
+  position:relative;overflow:hidden;
+  padding:90px 0 80px;
+  background:
+    radial-gradient(900px 500px at 75% 10%, rgba(41,217,241,.18), transparent 60%),
+    radial-gradient(700px 400px at 10% 90%, rgba(242,193,78,.10), transparent 60%),
+    var(--noche);
+}
+.hero::after{ /* grano */
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.08;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+.eyebrow{font-size:13px;letter-spacing:.35em;text-transform:uppercase;color:var(--cian);margin-bottom:18px}
+.hero h1{
+  font-family:"Abril Fatface",serif;font-weight:400;
+  font-size:clamp(42px,7vw,86px);line-height:1;letter-spacing:-.01em;
+}
+.hero h1 em{font-style:normal;color:var(--cian);text-transform:uppercase}
+.hero p.lead{margin-top:22px;font-size:18px;color:var(--suave);max-width:520px}
+.btns{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 22px;border-radius:999px;font-weight:700;font-size:15px;
+  text-decoration:none;border:2px solid var(--cian);transition:.2s;
+  font-family:"Courier Prime",monospace;cursor:pointer;
+}
+.btn.lleno{background:var(--cian);color:#04121a}
+.btn.lleno:hover{background:#fff;border-color:#fff}
+.btn.vacio{color:var(--cian);background:transparent}
+.btn.vacio:hover{background:rgba(41,217,241,.12)}
+
+/* Claqueta en la portada */
+.claqueta{width:100%;max-width:380px;justify-self:center;filter:drop-shadow(0 30px 60px rgba(41,217,241,.25))}
+.claqueta .palo{transform-origin:12px 70px;animation:clac 3.2s ease-in-out infinite}
+@keyframes clac{0%,70%,100%{transform:rotate(-18deg)}78%{transform:rotate(0)}82%{transform:rotate(-4deg)}86%{transform:rotate(0)}}
+@media (prefers-reduced-motion:reduce){.claqueta .palo{animation:none}}
+
+/* Secciones */
+section{padding:70px 0}
+.titulo-sec{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:30px;flex-wrap:wrap}
+.titulo-sec h2{font-family:"Abril Fatface",serif;font-weight:400;font-size:clamp(30px,4.4vw,48px);line-height:1.05}
+.titulo-sec h2 em{font-style:normal;color:var(--cian);text-transform:uppercase}
+.titulo-sec p{color:var(--suave);max-width:440px}
+
+/* Del reel a tu casa */
+.reels{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.reel{
+  position:relative;aspect-ratio:9/14;border-radius:16px;overflow:hidden;
+  background:var(--panel);border:1px solid var(--linea);
+  display:flex;flex-direction:column;justify-content:flex-end;padding:18px;
+  text-decoration:none;transition:.25s;
+}
+.reel:hover{transform:translateY(-4px);border-color:var(--cian)}
+.reel .fondo{position:absolute;inset:0;display:grid;place-items:center;opacity:.9}
+.reel .fondo svg{width:62%;height:auto}
+.reel::before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(7,11,20,.95) 30%,transparent 75%);z-index:1}
+.reel .txt{position:relative;z-index:2}
+.reel .pre{font-size:12px;letter-spacing:.2em;color:var(--cian);text-transform:uppercase}
+.reel h3{font-family:"Abril Fatface",serif;font-weight:400;font-size:24px;line-height:1.1;margin:6px 0 8px}
+.reel .ver{font-size:14px;color:var(--suave)}
+.reel .ver b{color:var(--texto)}
+
+/* Filtros */
+.filtros{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.chip{
+  padding:8px 16px;border-radius:999px;border:1px solid var(--linea);background:var(--noche-2);
+  color:var(--suave);font-family:inherit;font-size:14px;cursor:pointer;transition:.15s;
+}
+.chip:hover{color:var(--texto);border-color:var(--suave)}
+.chip[aria-pressed="true"]{background:var(--cian);border-color:var(--cian);color:#04121a;font-weight:700}
+.buscar{
+  width:100%;max-width:360px;padding:11px 16px;border-radius:999px;
+  border:1px solid var(--linea);background:var(--noche-2);color:var(--texto);
+  font-family:inherit;font-size:15px;
+}
+.buscar:focus{outline:2px solid var(--cian);outline-offset:2px}
+
+/* Productos */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;margin-top:26px}
+.prod{
+  background:var(--panel);border:1px solid var(--linea);border-radius:18px;overflow:hidden;
+  display:flex;flex-direction:column;transition:.2s;
+}
+.prod:hover{border-color:var(--cian);transform:translateY(-3px)}
+.prod .img{
+  aspect-ratio:4/3;display:grid;place-items:center;position:relative;
+  background:radial-gradient(circle at 50% 40%, var(--c1,rgba(41,217,241,.25)), transparent 65%), var(--noche-2);
+}
+.prod .img img{max-width:78%;max-height:82%;object-fit:contain}
+.prod .img svg{width:44%;height:auto}
+.etq{
+  position:absolute;top:12px;left:12px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+  background:var(--noche);border:1px solid var(--linea);padding:4px 9px;border-radius:999px;color:var(--suave)
+}
+.etq.top{background:var(--oro);color:#1b1300;border-color:var(--oro);font-weight:700}
+.prod .cuerpo{padding:18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.prod h3{font-family:"Abril Fatface",serif;font-weight:400;font-size:21px;line-height:1.15}
+.prod p{color:var(--suave);font-size:14px;flex:1}
+.prod .pie{display:flex;align-items:center;justify-content:space-between;margin-top:8px;gap:10px}
+.precio{font-size:13px;color:var(--suave);white-space:nowrap}
+.precio b{color:var(--texto);font-size:17px}
+.comprar{
+  padding:10px 16px;border-radius:999px;background:var(--cian);color:#04121a;font-weight:700;
+  text-decoration:none;font-size:14px;white-space:nowrap;transition:.15s
+}
+.comprar:hover{background:#fff}
+.vacio-msg{color:var(--suave);padding:40px 0;text-align:center;display:none}
+
+/* Banda */
+.banda{
+  background:linear-gradient(90deg,var(--cian),#7ae9f8);color:#04121a;
+  padding:46px 0;text-align:center;
+}
+.banda h2{font-family:"Abril Fatface",serif;font-weight:400;font-size:clamp(28px,4vw,44px);line-height:1.1}
+.banda p{margin-top:10px;font-weight:700}
+.banda .btn{margin-top:22px;border-color:#04121a;color:#04121a}
+.banda .btn:hover{background:#04121a;color:var(--cian)}
+
+footer{padding:50px 0 60px;border-top:1px solid var(--linea);color:var(--suave);font-size:13px}
+footer .wrap{display:grid;gap:14px}
+footer .marca{font-size:18px}
+.aviso{max-width:760px}
+
+/* Móvil */
+@media (max-width:860px){
+  .hero{padding:50px 0 50px}
+  .hero .wrap{grid-template-columns:1fr}
+  .claqueta{max-width:240px;order:-1}
+  .reels{grid-template-columns:repeat(2,1fr)}
+  .top nav{display:none}
+}
+@media (max-width:420px){
+  .wrap{padding:0 16px}
+  .reel h3{font-size:19px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="marca" href="#">CELULOIDE<br>CINEMA<small>LA TIENDA</small></a>
+    <nav>
+      <a href="#reels">De los reels</a>
+      <a href="#tienda">Tienda</a>
+      <a href="https://www.instagram.com/celuloidecinema" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+  </div>
+</header>
+
+<div class="tira" aria-hidden="true"></div>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Lo que sale en los reels</div>
+      <h1>El cine, <em>en tu casa</em></h1>
+      <p class="lead">Las cámaras, la luz y los objetos de las pelis de las que hablamos. Elegidos uno a uno, para ver, grabar y coleccionar.</p>
+      <div class="btns">
+        <a class="btn lleno" href="#tienda">Ver la tienda</a>
+        <a class="btn vacio" href="#reels">Del reel a tu casa</a>
+      </div>
+    </div>
+    <svg class="claqueta" viewBox="0 0 220 200" aria-hidden="true">
+      <rect x="10" y="70" width="200" height="120" rx="8" fill="#0d1424" stroke="#29d9f1" stroke-width="3"/>
+      <g fill="#29d9f1" font-family="Courier Prime, monospace" font-size="13" font-weight="700">
+        <text x="24" y="102">PROD. CELULOIDE</text>
+        <line x1="22" y1="114" x2="198" y2="114" stroke="#1e2a44" stroke-width="2"/>
+        <text x="24" y="138" fill="#eef4fb">ESCENA 01</text><text x="128" y="138" fill="#eef4fb">TOMA 3</text>
+        <line x1="22" y1="150" x2="198" y2="150" stroke="#1e2a44" stroke-width="2"/>
+        <text x="24" y="174" fill="#9fb0c8">DIR. TÚ</text>
+      </g>
+      <rect x="10" y="50" width="200" height="22" fill="#eef4fb"/>
+      <g fill="#070b14"><path d="M30 50h22l-12 22H18z"/><path d="M74 50h22l-12 22H62z"/><path d="M118 50h22l-12 22h-22z"/><path d="M162 50h22l-12 22h-22z"/></g>
+      <g class="palo">
+        <rect x="10" y="48" width="200" height="22" fill="#29d9f1" transform="translate(0 0)"/>
+        <g fill="#070b14"><path d="M30 48h22l-12 22H18z"/><path d="M74 48h22l-12 22H62z"/><path d="M118 48h22l-12 22h-22z"/><path d="M162 48h22l-12 22h-22z"/></g>
+      </g>
+      <circle cx="12" cy="70" r="5" fill="#9fb0c8"/>
+    </svg>
+  </div>
+</section>
+
+<div class="tira" aria-hidden="true"></div>
+
+<section id="reels">
+  <div class="wrap">
+    <div class="titulo-sec">
+      <h2>Del reel <em>a tu casa</em></h2>
+      <p>¿Viste el vídeo? Esto es lo que sale en él, para que lo tengas tú.</p>
+    </div>
+    <div class="reels" id="reels-grid"></div>
+  </div>
+</section>
+
+<section id="tienda" style="background:var(--noche-2)">
+  <div class="wrap">
+    <div class="titulo-sec">
+      <h2>La <em>tienda</em></h2>
+      <input class="buscar" id="buscar" type="search" placeholder="Buscar: sable, proyector, croma…" aria-label="Buscar productos">
+    </div>
+    <div class="filtros" id="filtros" role="group" aria-label="Categorías"></div>
+    <div class="grid" id="grid"></div>
+    <p class="vacio-msg" id="vacio">No hay nada con eso. Prueba otra palabra.</p>
+  </div>
+</section>
+
+<div class="banda">
+  <div class="wrap">
+    <h2>¿Qué peli quieres que destripemos?</h2>
+    <p>Cada semana, un reel nuevo con lo que no viste en pantalla.</p>
+    <a class="btn" href="https://www.instagram.com/celuloidecinema" target="_blank" rel="noopener">Síguenos en Instagram</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="marca">CELULOIDE CINEMA</div>
+    <p class="aviso"><b>Como Afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables.</b>
+      Los enlaces de esta página llevan a Amazon; si compras a través de ellos, a ti no te cuesta más y ayudas a que sigamos haciendo vídeos.
+      Los precios son orientativos y pueden cambiar: el precio que vale es el que ves en Amazon.</p>
+    <p>© <span id="anio"></span> Celuloide Cinema</p>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   PRODUCTOS
+   Para añadir uno, copia una línea y cambia los datos.
+   - asin: el código del producto en Amazon (lo ves en la URL: /dp/XXXXXXXXXX).
+           Si lo pones, el botón va directo al producto.
+   - busca: si no hay asin, el botón abre la búsqueda en Amazon con estas palabras.
+   - img:  opcional, la imagen que te da Amazon (SiteStripe → Imagen). Si no, sale el dibujo.
+   - top:  true para marcarlo como «El favorito».
+   ============================================================ */
+const PRODUCTOS = [
+  // Grabar como en el cine
+  {cat:"grabar", icono:"gimbal",  nombre:"Estabilizador para el móvil", txt:"El truco del plano que flota, sin trípode ni carro. Lo vimos en el reel del estabilizador.", precio:"desde 79 €", busca:"estabilizador gimbal movil", top:true},
+  {cat:"grabar", icono:"croma",   nombre:"Fondo croma verde plegable",   txt:"El verde de los efectos especiales, para tu habitación. Se monta en un minuto.", precio:"desde 35 €", busca:"fondo croma verde plegable"},
+  {cat:"grabar", icono:"luz",     nombre:"Panel de luz LED RGB",          txt:"Cualquier color de luz, como en los rodajes de noche. Cabe en el bolsillo.", precio:"desde 25 €", busca:"panel led rgb portatil video"},
+  {cat:"grabar", icono:"micro",   nombre:"Micrófono inalámbrico de solapa", txt:"Media película es el sonido. Se engancha a la ropa y se conecta al móvil.", precio:"desde 39 €", busca:"microfono inalambrico solapa movil"},
+  {cat:"grabar", icono:"objetivo",nombre:"Objetivo 50 mm f/1.8",          txt:"El fondo desenfocado del cine, el objetivo más barato que lo consigue.", precio:"desde 120 €", busca:"objetivo 50mm f1.8"},
+  {cat:"grabar", icono:"filtro",  nombre:"Filtro ND variable",             txt:"Para grabar a pleno sol con el movimiento suave de una peli.", precio:"desde 30 €", busca:"filtro nd variable"},
+  {cat:"grabar", icono:"carrete", nombre:"Carrete de película 35 mm",      txt:"Celuloide de verdad. El grano que intentan copiar los filtros.", precio:"desde 15 €", busca:"carrete pelicula 35mm color"},
+
+  // Coleccionables de las pelis
+  {cat:"coleccion", icono:"sable", nombre:"Sable láser de colección",       txt:"Con luz y sonido. ¿Te acuerdas de qué estaba hecho el sonido de verdad?", precio:"desde 60 €", busca:"sable laser star wars", top:true},
+  {cat:"coleccion", icono:"casco", nombre:"Casco de Darth Vader",           txt:"Réplica a tamaño real, con la voz. Para la frase que nunca dijo.", precio:"desde 120 €", busca:"casco darth vader replica"},
+  {cat:"coleccion", icono:"dino",  nombre:"T-Rex de Jurassic Park",          txt:"El rugido más famoso del cine, en tu estantería.", precio:"desde 30 €", busca:"figura t-rex jurassic park"},
+  {cat:"coleccion", icono:"latigo",nombre:"Látigo de Indiana Jones",         txt:"El objeto, no el truco: el que de verdad suena al restallar.", precio:"desde 40 €", busca:"latigo indiana jones"},
+  {cat:"coleccion", icono:"murci", nombre:"Batman de colección",             txt:"Con capa de tela. La que en las pelis no deja girar el cuello.", precio:"desde 25 €", busca:"figura batman coleccion"},
+  {cat:"coleccion", icono:"iron",  nombre:"Casco de Iron Man",               txt:"Con apertura motorizada y luz en los ojos.", precio:"desde 90 €", busca:"casco iron man electronico"},
+
+  // Ver pelis en casa
+  {cat:"casa", icono:"proyector", nombre:"Proyector para casa",          txt:"Pantalla de cine en la pared del salón, sin obras.", precio:"desde 150 €", busca:"proyector 4k casa", top:true},
+  {cat:"casa", icono:"disco",     nombre:"Trilogía Matrix en 4K",          txt:"Para ver el tiempo bala con calma y fotograma a fotograma.", precio:"desde 30 €", busca:"matrix trilogia 4k"},
+  {cat:"casa", icono:"palomitas", nombre:"Máquina de palomitas",           txt:"La de los cines de antes, con su carrito.", precio:"desde 40 €", busca:"maquina palomitas cine"},
+  {cat:"casa", icono:"butaca",    nombre:"Pantalla de proyección enrollable", txt:"La diferencia entre proyectar en la pared y verlo de verdad.", precio:"desde 50 €", busca:"pantalla proyeccion enrollable"},
+
+  // Libros de cine
+  {cat:"libros", icono:"libro", nombre:"El cine según Hitchcock",           txt:"Las conversaciones con Truffaut: el libro que leen todos los directores.", precio:"desde 25 €", busca:"el cine segun hitchcock truffaut"},
+  {cat:"libros", icono:"libro", nombre:"En el momento del parpadeo",         txt:"Walter Murch explica por qué se corta un plano justo ahí.", precio:"desde 18 €", busca:"walter murch en el momento del parpadeo"},
+  {cat:"libros", icono:"libro", nombre:"Los Simpson: el arte",              txt:"Por qué son amarillos y otras decisiones que nadie te contó.", precio:"desde 30 €", busca:"libro arte los simpson"},
+];
+
+const CATEGORIAS = [
+  {id:"todo",      nombre:"Todo"},
+  {id:"grabar",    nombre:"Grabar como en el cine"},
+  {id:"coleccion", nombre:"Coleccionables"},
+  {id:"casa",      nombre:"Cine en casa"},
+  {id:"libros",    nombre:"Libros de cine"},
+];
+
+// Las tarjetas grandes de «Del reel a tu casa»
+const REELS = [
+  {titulo:"El sable láser", reel:"¿De qué estaba hecho su sonido?", icono:"sable", busca:"sable laser star wars", color:"#29d9f1"},
+  {titulo:"El croma verde", reel:"¿Por qué verde y no azul?",        icono:"croma", busca:"fondo croma verde plegable", color:"#3ee07a"},
+  {titulo:"El tiempo bala", reel:"¿Cómo se rodó Matrix?",            icono:"disco", busca:"matrix trilogia 4k", color:"#7cff9b"},
+  {titulo:"El T-Rex",       reel:"¿De qué animal es el rugido?",     icono:"dino",  busca:"figura t-rex jurassic park", color:"#f2c14e"},
+];
+
+/* ---------- Dibujos (sin imágenes de terceros) ---------- */
+const ICONOS = {
+  gimbal:`<path d="M50 8v22M38 30h24v10H38zM50 40v18M30 58h40l-6 34H36z" />`,
+  croma:`<rect x="14" y="16" width="72" height="52" rx="4" fill="#3ee07a" stroke="none" opacity=".85"/><path d="M14 16h72v52H14zM30 68l-8 24M70 68l8 24"/>`,
+  luz:`<rect x="18" y="22" width="64" height="44" rx="6"/><g stroke="none" fill="currentColor" opacity=".7"><circle cx="34" cy="38" r="5"/><circle cx="50" cy="38" r="5"/><circle cx="66" cy="38" r="5"/><circle cx="34" cy="52" r="5"/><circle cx="50" cy="52" r="5"/><circle cx="66" cy="52" r="5"/></g><path d="M50 66v20M36 86h28"/>`,
+  micro:`<rect x="38" y="10" width="24" height="44" rx="12"/><path d="M28 44a22 22 0 0 0 44 0M50 66v20M36 86h28"/>`,
+  objetivo:`<circle cx="50" cy="50" r="36"/><circle cx="50" cy="50" r="24"/><circle cx="50" cy="50" r="10" fill="currentColor" opacity=".5"/>`,
+  filtro:`<circle cx="50" cy="50" r="36"/><path d="M22 50a28 28 0 0 1 56 0" fill="currentColor" opacity=".35" stroke="none"/><circle cx="50" cy="50" r="30"/>`,
+  carrete:`<rect x="26" y="18" width="48" height="66" rx="6"/><path d="M26 30h48M26 72h48"/><rect x="74" y="36" width="18" height="30"/><path d="M78 40v22M84 40v22"/>`,
+  sable:`<path d="M50 6v58" stroke-width="9" stroke="currentColor" opacity=".9"/><rect x="43" y="64" width="14" height="26" rx="2" fill="#9fb0c8" stroke="#9fb0c8"/><path d="M43 72h14M43 80h14" stroke="#070b14"/>`,
+  casco:`<path d="M20 70V44a30 30 0 0 1 60 0v26l8 18H12z"/><path d="M34 52h12l-4 10H32zM54 52h12l2 10H58z" fill="currentColor"/><path d="M42 74l8-6 8 6v14H42z"/>`,
+  dino:`<path d="M14 48l18-20h30l12 10h12v14H70l-6 8 8 26H60l-6-18H40l-4 18H26l2-24-14-6z"/><circle cx="66" cy="38" r="2.5" fill="currentColor"/><path d="M74 52l4 6M80 52l2 6"/>`,
+  latigo:`<path d="M20 84l14-14" stroke-width="8"/><path d="M34 70c20-20 50-8 50-30S56 20 40 30" fill="none"/>`,
+  murci:`<path d="M10 40c10 0 14 6 14 6s4-12 14-12l4-10 4 8h8l4-8 4 10c10 0 14 12 14 12s4-6 14-6c-6 8-6 20-6 20s-10-6-16 4c-4-6-10-6-12 2-2-8-8-8-12-2-6-10-16-4-16-4s0-12-6-20z"/>`,
+  iron:`<path d="M22 30c0-14 12-22 28-22s28 8 28 22v34l-14 26H36L22 64z"/><path d="M30 44h16l-4 8H32zM54 44h16l-2 8H58z" fill="currentColor"/><path d="M38 76h24"/>`,
+  proyector:`<rect x="12" y="36" width="76" height="36" rx="8"/><circle cx="34" cy="54" r="11"/><circle cx="34" cy="54" r="4" fill="currentColor"/><path d="M60 48h20M60 58h14M22 72v8M78 72v8"/>`,
+  disco:`<circle cx="50" cy="50" r="38"/><circle cx="50" cy="50" r="8"/><path d="M50 22a28 28 0 0 1 28 28" opacity=".5"/>`,
+  palomitas:`<path d="M26 40h48l-8 50H34z"/><path d="M38 40l2 50M50 40v50M62 40l-2 50"/><path d="M26 40c-4-12 8-18 14-12 2-10 18-10 20 0 6-6 18 0 14 12"/>`,
+  butaca:`<path d="M24 50V26a8 8 0 0 1 8-8h36a8 8 0 0 1 8 8v24"/><rect x="14" y="48" width="12" height="28" rx="4"/><rect x="74" y="48" width="12" height="28" rx="4"/><path d="M26 58h48v18H26zM22 76v12M78 76v12"/>`,
+  libro:`<path d="M50 24c-10-8-24-8-36-4v62c12-4 26-4 36 4 10-8 24-8 36-4V20c-12-4-26-4-36 4zM50 24v62"/>`,
+};
+const dibujo = (k, color="var(--cian)") =>
+  `<svg viewBox="0 0 100 100" fill="none" stroke="${color}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="color:${color}" aria-hidden="true">${ICONOS[k]||ICONOS.carrete}</svg>`;
+
+/* ---------- Enlaces de afiliado ---------- */
+const enlace = p => p.asin
+  ? `${AMAZON}/dp/${p.asin}?tag=${encodeURIComponent(TAG)}`
+  : `${AMAZON}/s?k=${encodeURIComponent(p.busca)}&tag=${encodeURIComponent(TAG)}`;
+const attrs = `target="_blank" rel="nofollow sponsored noopener"`;
+
+/* ---------- Pintar ---------- */
+document.getElementById("anio").textContent = new Date().getFullYear();
+
+document.getElementById("reels-grid").innerHTML = REELS.map(r => `
+  <a class="reel" href="${enlace(r)}" ${attrs}>
+    <div class="fondo">${dibujo(r.icono, r.color)}</div>
+    <div class="txt">
+      <div class="pre">En el reel</div>
+      <h3>${r.titulo}</h3>
+      <div class="ver">${r.reel}<br><b>Verlo en Amazon →</b></div>
+    </div>
+  </a>`).join("");
+
+let cat = "todo", q = "";
+const filtros = document.getElementById("filtros");
+filtros.innerHTML = CATEGORIAS.map(c =>
+  `<button class="chip" data-cat="${c.id}" aria-pressed="${c.id==="todo"}">${c.nombre}</button>`).join("");
+filtros.addEventListener("click", e => {
+  const b = e.target.closest(".chip"); if(!b) return;
+  cat = b.dataset.cat;
+  filtros.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed", x===b));
+  pintar();
+});
+document.getElementById("buscar").addEventListener("input", e => { q = e.target.value.trim().toLowerCase(); pintar(); });
+
+const quitarTildes = s => s.normalize("NFD").replace(/[̀-ͯ]/g,"");
+function pintar(){
+  const nq = quitarTildes(q);
+  const lista = PRODUCTOS.filter(p =>
+    (cat==="todo" || p.cat===cat) &&
+    (!nq || quitarTildes((p.nombre+" "+p.txt+" "+(p.busca||"")).toLowerCase()).includes(nq)));
+  document.getElementById("grid").innerHTML = lista.map(p => `
+    <article class="prod">
+      <div class="img">
+        ${p.top ? `<span class="etq top">El favorito</span>` : `<span class="etq">${CATEGORIAS.find(c=>c.id===p.cat).nombre}</span>`}
+        ${p.img ? `<img src="${p.img}" alt="${p.nombre}" loading="lazy">` : dibujo(p.icono)}
+      </div>
+      <div class="cuerpo">
+        <h3>${p.nombre}</h3>
+        <p>${p.txt}</p>
+        <div class="pie">
+          <span class="precio"><b>${p.precio}</b></span>
+          <a class="comprar" href="${enlace(p)}" ${attrs}>Ver en Amazon</a>
+        </div>
+      </div>
+    </article>`).join("");
+  document.getElementById("vacio").style.display = lista.length ? "none" : "block";
+}
+pintar();
+</script>
+</body>
+</html>
